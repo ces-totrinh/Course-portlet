@@ -84,4 +84,10 @@ public interface CourseService extends BaseService, InvokableService {
 
 	public com.liferay.docs.course.model.Course deleteCourse(long courseId)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.docs.course.model.Course _updateCourse(long courseId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String lecturer, int duration, boolean status)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 }

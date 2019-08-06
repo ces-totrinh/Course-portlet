@@ -39,15 +39,6 @@ public class CoursePortlet extends MVCPortlet {
 		int duration = ParamUtil.getInteger(actionRequest, "duration");
 		boolean status = ParamUtil.getBoolean(actionRequest, "status");
 		
-		Course course = null;
-		
-		if(courseId <= 0) {
-			course = CourseServiceUtil.addCourse(name, description, lecturer, duration, status);
-		}
-		else {
-			course = CourseServiceUtil.getCourse(courseId);
-			course = CourseServiceUtil.updateCourse(courseId, name, description, lecturer, duration, status);
-		}
-		return course;
+		return CourseServiceUtil._updateCourse(courseId, name, description, lecturer, duration, status);
 	}
 }

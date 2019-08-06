@@ -124,5 +124,22 @@ public class CourseServiceSoap {
 		}
 	}
 
+	public static com.liferay.docs.course.model.CourseSoap _updateCourse(
+		long courseId, java.lang.String name, java.lang.String description,
+		java.lang.String lecturer, int duration, boolean status)
+		throws RemoteException {
+		try {
+			com.liferay.docs.course.model.Course returnValue = CourseServiceUtil._updateCourse(courseId,
+					name, description, lecturer, duration, status);
+
+			return com.liferay.docs.course.model.CourseSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(CourseServiceSoap.class);
 }

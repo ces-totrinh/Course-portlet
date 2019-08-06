@@ -16,6 +16,7 @@ package com.liferay.docs.course.service.impl;
 
 import com.liferay.docs.course.model.Course;
 import com.liferay.docs.course.service.CourseLocalServiceUtil;
+import com.liferay.docs.course.service.CourseServiceUtil;
 import com.liferay.docs.course.service.base.CourseServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -56,5 +57,18 @@ public class CourseServiceImpl extends CourseServiceBaseImpl {
 	public Course deleteCourse(long courseId) throws SystemException {
 		Course course = coursePersistence.fetchByPrimaryKey(courseId);
 		return CourseLocalServiceUtil.deleteCourse(course);
+	}
+	
+	public Course _updateCourse(long courseId, String name, String description, String lecturer, int duration, boolean status) throws PortalException, SystemException {
+		Course course = null;
+		if(courseId <= 0) {
+			course = addCourse(name, description, lecturer, duration, status);
+		}
+		else {
+			course = getCourse(courseId);
+			course = updateCourse(courseId, name, description, lecturer, duration, status);
+		}
+		return course;
+	
 	}
 }

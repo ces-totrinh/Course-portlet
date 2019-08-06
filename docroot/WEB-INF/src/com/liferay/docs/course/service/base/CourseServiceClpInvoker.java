@@ -53,6 +53,13 @@ public class CourseServiceClpInvoker {
 		_methodName27 = "deleteCourse";
 
 		_methodParameterTypes27 = new String[] { "long" };
+
+		_methodName28 = "_updateCourse";
+
+		_methodParameterTypes28 = new String[] {
+				"long", "java.lang.String", "java.lang.String",
+				"java.lang.String", "int", "boolean"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -96,6 +103,15 @@ public class CourseServiceClpInvoker {
 			return CourseServiceUtil.deleteCourse(((Long)arguments[0]).longValue());
 		}
 
+		if (_methodName28.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes28, parameterTypes)) {
+			return CourseServiceUtil._updateCourse(((Long)arguments[0]).longValue(),
+				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
+				(java.lang.String)arguments[3],
+				((Integer)arguments[4]).intValue(),
+				((Boolean)arguments[5]).booleanValue());
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -111,4 +127,6 @@ public class CourseServiceClpInvoker {
 	private String[] _methodParameterTypes26;
 	private String _methodName27;
 	private String[] _methodParameterTypes27;
+	private String _methodName28;
+	private String[] _methodParameterTypes28;
 }

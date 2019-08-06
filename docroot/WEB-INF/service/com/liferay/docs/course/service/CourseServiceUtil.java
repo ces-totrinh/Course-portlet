@@ -94,6 +94,16 @@ public class CourseServiceUtil {
 		return getService().deleteCourse(courseId);
 	}
 
+	public static com.liferay.docs.course.model.Course _updateCourse(
+		long courseId, java.lang.String name, java.lang.String description,
+		java.lang.String lecturer, int duration, boolean status)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   ._updateCourse(courseId, name, description, lecturer,
+			duration, status);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

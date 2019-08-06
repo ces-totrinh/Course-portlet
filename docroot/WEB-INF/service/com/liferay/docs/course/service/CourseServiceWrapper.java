@@ -89,6 +89,16 @@ public class CourseServiceWrapper implements CourseService,
 		return _courseService.deleteCourse(courseId);
 	}
 
+	@Override
+	public com.liferay.docs.course.model.Course _updateCourse(long courseId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String lecturer, int duration, boolean status)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _courseService._updateCourse(courseId, name, description,
+			lecturer, duration, status);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */
