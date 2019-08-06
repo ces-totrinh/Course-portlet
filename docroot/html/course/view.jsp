@@ -3,9 +3,6 @@
 <portlet:renderURL var="addURL">
 	<portlet:param name="mvcPath" value="/html/course/editForm.jsp" />
 </portlet:renderURL>
-<%
-	
-%>
 
 <div align="right">
 	<a href="${addURL}">Add new Student</a>
