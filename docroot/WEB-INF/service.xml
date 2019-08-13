@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
+<service-builder package-path="com.liferay.docs.course">
+	<author>to.trinh</author>
+	<namespace>couse</namespace>
+
+	<entity name="Course" local-service="true" remote-service="true"
+		table="course_tbl">
+
+		<!-- PK fields -->
+		<column name="courseId" type="long" primary="true" db-name="course_id" />
+
+		<!-- Other fields -->
+
+		<column name="name" type="String" db-name="course_name" />
+		<column name="description" type="String"
+			db-name="course_description" />
+		<column name="lecturer" type="String" db-name="course_lecturer" />
+		<column name="duration" type="int" db-name="course_duration" />
+		<column name="status" type="boolean" db-name="course_status" />
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="name" />
+		</order>
+	</entity>
+</service-builder>

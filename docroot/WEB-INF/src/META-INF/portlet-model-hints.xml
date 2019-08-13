@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.liferay.docs.course.model.Course">
+		<field name="courseId" type="long" />
+		<field name="name" type="String">
+			<hint name="max-length">75</hint>
+		</field>
+		<field name="description" type="String">
+			<hint name="max-length">2000</hint>
+		</field>
+		<field name="lecturer" type="String">
+			<hint name="max-length">75</hint>
+		</field>
+		<field name="duration" type="int" />
+		<field name="status" type="boolean" />
+	</model>
+</model-hints>
