@@ -1,4 +1,4 @@
-<%@ include file="/html/course/init.jsp"%>
+<%@ include file="/html/init.jsp"%>
 
 <%
 	long courseId = ParamUtil.getLong(renderRequest, "courseId");

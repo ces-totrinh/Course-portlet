@@ -1,11 +1,12 @@
-<%@ include file="/html/course/init.jsp"%>
+<%@ include file="/html/init.jsp"%>
 
 <portlet:renderURL var="addURL">
 	<portlet:param name="mvcPath" value="/html/course/editForm.jsp" />
 </portlet:renderURL>
 
 <div align="right">
-	<a href="${addURL}">Add new Student</a>
+	<liferay-ui:icon image="add_article" message="Add new Course"/>
+	<aui:a href="${addURL}">Add new Course</aui:a>
 </div>
 <liferay-ui:search-container emptyResultsMessage="No result was found">
 	<liferay-ui:search-container-results results="<%= CourseLocalServiceUtil.getCourses(searchContainer.getStart(), searchContainer.getEnd())%>" total="<%= CourseLocalServiceUtil.getCoursesCount() %>" />
