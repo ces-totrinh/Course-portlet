@@ -16,10 +16,13 @@ package com.liferay.docs.course.service.impl;
 
 import com.liferay.docs.course.model.Course;
 import com.liferay.docs.course.service.CourseLocalServiceUtil;
-import com.liferay.docs.course.service.CourseServiceUtil;
 import com.liferay.docs.course.service.base.CourseServiceBaseImpl;
+import com.liferay.docs.course.service.permission.ModelPermission;
+import com.liferay.docs.course.service.permission.CoursePermission;
+import com.liferay.docs.course.util.ActionKeys;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.service.ServiceContext;
 
 /**
  * The implementation of the course remote service.
@@ -42,31 +45,36 @@ public class CourseServiceImpl extends CourseServiceBaseImpl {
 	 * Never reference this interface directly. Always use {@link com.liferay.docs.course.service.CourseServiceUtil} to access the course remote service.
 	 */
 	
-	public Course addCourse(String name, String description, String lecturer, int duration, boolean status) throws PortalException, SystemException {
+	public Course addCourse(String name, String description, String lecturer, int duration, boolean status, ServiceContext serviceContext) throws PortalException, SystemException {
+		ModelPermission.check(getPermissionChecker(), serviceContext.getScopeGroupId(), ActionKeys.ADD_COURSE);
 		return CourseLocalServiceUtil.addCourse(name, description, lecturer, duration, status);
 	}
 	
-	public Course updateCourse(long courseId, String name, String description, String lecturer, int duration, boolean status) throws PortalException, SystemException {
+	public Course updateCourse(long courseId, String name, String description, String lecturer, int duration, boolean status, ServiceContext serviceContext) throws PortalException, SystemException {
+		CoursePermission.check(getPermissionChecker(), serviceContext.getScopeGroupId(), courseId, ActionKeys.UPDATE_COURSE);
 		return CourseLocalServiceUtil.updateCourse(courseId, name, description, lecturer, duration, status);
 	}
-	
+	public Course updateStatusOfCourse(long groupId, long courseId, boolean status) throws PortalException, SystemException {
+		CoursePermission.check(getPermissionChecker(), groupId, courseId, ActionKeys.UPDATE_COURSE);
+		return CourseLocalServiceUtil.updateStatusOfCourse(courseId, status);
+	}
 	public Course getCourse(long courseId) throws PortalException, SystemException {
 		return CourseLocalServiceUtil.getCourse(courseId);
 	}
 	
-	public Course deleteCourse(long courseId) throws SystemException {
-		Course course = coursePersistence.fetchByPrimaryKey(courseId);
-		return CourseLocalServiceUtil.deleteCourse(course);
+	public Course deleteCourse(long courseId, ServiceContext serviceContext) throws Exception {
+		CoursePermission.check(getPermissionChecker(), serviceContext.getScopeGroupId(), courseId, ActionKeys.DELETE_COURSE);
+		return CourseLocalServiceUtil.deleteCourse(courseId);
 	}
 	
-	public Course _updateCourse(long courseId, String name, String description, String lecturer, int duration, boolean status) throws PortalException, SystemException {
+	public Course _updateCourse(long courseId, String name, String description, String lecturer, int duration, boolean status, ServiceContext serviceContext) throws PortalException, SystemException {
 		Course course = null;
 		if(courseId <= 0) {
-			course = addCourse(name, description, lecturer, duration, status);
+			course = addCourse(name, description, lecturer, duration, status, serviceContext);
 		}
 		else {
 			course = getCourse(courseId);
-			course = updateCourse(courseId, name, description, lecturer, duration, status);
+			course = updateCourse(courseId, name, description, lecturer, duration, status, serviceContext);
 		}
 		return course;
 	
