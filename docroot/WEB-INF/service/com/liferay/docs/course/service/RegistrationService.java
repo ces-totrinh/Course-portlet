@@ -18,32 +18,31 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
 import com.liferay.portal.kernel.transaction.Isolation;
-import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.security.ac.AccessControlled;
 import com.liferay.portal.service.BaseService;
 import com.liferay.portal.service.InvokableService;
 
 /**
- * Provides the remote service interface for Course. Methods of this
+ * Provides the remote service interface for Registration. Methods of this
  * service are expected to have security checks based on the propagated JAAS
  * credentials because this service can be accessed remotely.
  *
  * @author to.trinh
- * @see CourseServiceUtil
- * @see com.liferay.docs.course.service.base.CourseServiceBaseImpl
- * @see com.liferay.docs.course.service.impl.CourseServiceImpl
+ * @see RegistrationServiceUtil
+ * @see com.liferay.docs.course.service.base.RegistrationServiceBaseImpl
+ * @see com.liferay.docs.course.service.impl.RegistrationServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface CourseService extends BaseService, InvokableService {
+public interface RegistrationService extends BaseService, InvokableService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CourseServiceUtil} to access the course remote service. Add custom service methods to {@link com.liferay.docs.course.service.impl.CourseServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link RegistrationServiceUtil} to access the registration remote service. Add custom service methods to {@link com.liferay.docs.course.service.impl.RegistrationServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 
 	/**
@@ -65,38 +64,26 @@ public interface CourseService extends BaseService, InvokableService {
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
 
-	public com.liferay.docs.course.model.Course addCourse(
-		java.lang.String name, java.lang.String description,
-		java.lang.String lecturer, int duration, boolean status,
+	public com.liferay.docs.course.model.Registration addRegistration(
+		long courseId, long userId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.docs.course.model.Course updateCourse(long courseId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String lecturer, int duration, boolean status,
+	public com.liferay.docs.course.model.Registration approveRegistration(
+		long registrationId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.docs.course.model.Course updateStatusOfCourse(
-		long groupId, long courseId, boolean status)
+	public com.liferay.docs.course.model.Registration rejectRegistration(
+		long registrationId,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.docs.course.model.Course getCourse(long courseId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public com.liferay.docs.course.model.Course deleteCourse(long courseId,
+	public com.liferay.docs.course.model.Registration deleteRegistration(
+		long registrationId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws java.lang.Exception;
-
-	public com.liferay.docs.course.model.Course _updateCourse(long courseId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String lecturer, int duration, boolean status,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
 }

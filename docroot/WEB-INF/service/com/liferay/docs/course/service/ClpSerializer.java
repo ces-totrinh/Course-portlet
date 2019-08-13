@@ -15,6 +15,7 @@
 package com.liferay.docs.course.service;
 
 import com.liferay.docs.course.model.CourseClp;
+import com.liferay.docs.course.model.RegistrationClp;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -106,6 +107,10 @@ public class ClpSerializer {
 			return translateInputCourse(oldModel);
 		}
 
+		if (oldModelClassName.equals(RegistrationClp.class.getName())) {
+			return translateInputRegistration(oldModel);
+		}
+
 		return oldModel;
 	}
 
@@ -125,6 +130,16 @@ public class ClpSerializer {
 		CourseClp oldClpModel = (CourseClp)oldModel;
 
 		BaseModel<?> newModel = oldClpModel.getCourseRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputRegistration(BaseModel<?> oldModel) {
+		RegistrationClp oldClpModel = (RegistrationClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getRegistrationRemoteModel();
 
 		newModel.setModelAttributes(oldClpModel.getModelAttributes());
 
@@ -151,6 +166,43 @@ public class ClpSerializer {
 		if (oldModelClassName.equals(
 					"com.liferay.docs.course.model.impl.CourseImpl")) {
 			return translateOutputCourse(oldModel);
+		}
+		else if (oldModelClassName.endsWith("Clp")) {
+			try {
+				ClassLoader classLoader = ClpSerializer.class.getClassLoader();
+
+				Method getClpSerializerClassMethod = oldModelClass.getMethod(
+						"getClpSerializerClass");
+
+				Class<?> oldClpSerializerClass = (Class<?>)getClpSerializerClassMethod.invoke(oldModel);
+
+				Class<?> newClpSerializerClass = classLoader.loadClass(oldClpSerializerClass.getName());
+
+				Method translateOutputMethod = newClpSerializerClass.getMethod("translateOutput",
+						BaseModel.class);
+
+				Class<?> oldModelModelClass = oldModel.getModelClass();
+
+				Method getRemoteModelMethod = oldModelClass.getMethod("get" +
+						oldModelModelClass.getSimpleName() + "RemoteModel");
+
+				Object oldRemoteModel = getRemoteModelMethod.invoke(oldModel);
+
+				BaseModel<?> newModel = (BaseModel<?>)translateOutputMethod.invoke(null,
+						oldRemoteModel);
+
+				return newModel;
+			}
+			catch (Throwable t) {
+				if (_log.isInfoEnabled()) {
+					_log.info("Unable to translate " + oldModelClassName, t);
+				}
+			}
+		}
+
+		if (oldModelClassName.equals(
+					"com.liferay.docs.course.model.impl.RegistrationImpl")) {
+			return translateOutputRegistration(oldModel);
 		}
 		else if (oldModelClassName.endsWith("Clp")) {
 			try {
@@ -269,6 +321,11 @@ public class ClpSerializer {
 			return new com.liferay.docs.course.NoSuchCourseException();
 		}
 
+		if (className.equals(
+					"com.liferay.docs.course.NoSuchRegistrationException")) {
+			return new com.liferay.docs.course.NoSuchRegistrationException();
+		}
+
 		return throwable;
 	}
 
@@ -278,6 +335,16 @@ public class ClpSerializer {
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setCourseRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputRegistration(BaseModel<?> oldModel) {
+		RegistrationClp newModel = new RegistrationClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setRegistrationRemoteModel(oldModel);
 
 		return newModel;
 	}

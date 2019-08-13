@@ -83,7 +83,11 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.finder.cache.enabled.com.liferay.docs.course.model.Course"),
 			true);
-	public static final boolean COLUMN_BITMASK_ENABLED = false;
+	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
+				"value.object.column.bitmask.enabled.com.liferay.docs.course.model.Course"),
+			true);
+	public static long STATUS_COLUMN_BITMASK = 1L;
+	public static long NAME_COLUMN_BITMASK = 2L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -241,6 +245,8 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 
 	@Override
 	public void setName(String name) {
+		_columnBitmask = -1L;
+
 		_name = name;
 	}
 
@@ -300,7 +306,23 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 
 	@Override
 	public void setStatus(boolean status) {
+		_columnBitmask |= STATUS_COLUMN_BITMASK;
+
+		if (!_setOriginalStatus) {
+			_setOriginalStatus = true;
+
+			_originalStatus = _status;
+		}
+
 		_status = status;
+	}
+
+	public boolean getOriginalStatus() {
+		return _originalStatus;
+	}
+
+	public long getColumnBitmask() {
+		return _columnBitmask;
 	}
 
 	@Override
@@ -384,6 +406,13 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 
 	@Override
 	public void resetOriginalValues() {
+		CourseModelImpl courseModelImpl = this;
+
+		courseModelImpl._originalStatus = courseModelImpl._status;
+
+		courseModelImpl._setOriginalStatus = false;
+
+		courseModelImpl._columnBitmask = 0;
 	}
 
 	@Override
@@ -490,5 +519,8 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 	private String _lecturer;
 	private int _duration;
 	private boolean _status;
+	private boolean _originalStatus;
+	private boolean _setOriginalStatus;
+	private long _columnBitmask;
 	private Course _escapedModel;
 }

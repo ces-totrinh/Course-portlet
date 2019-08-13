@@ -15,4 +15,10 @@
 		<field name="duration" type="int" />
 		<field name="status" type="boolean" />
 	</model>
+	<model name="com.liferay.docs.course.model.Registration">
+		<field name="registrationId" type="long" />
+		<field name="userId" type="long" />
+		<field name="courseId" type="long" />
+		<field name="status" type="int" />
+	</model>
 </model-hints>
