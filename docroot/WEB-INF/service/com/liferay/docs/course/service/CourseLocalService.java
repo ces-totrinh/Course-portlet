@@ -73,11 +73,13 @@ public interface CourseLocalService extends BaseLocalService,
 	* @return the course that was removed
 	* @throws PortalException if a course with the primary key could not be found
 	* @throws SystemException if a system exception occurred
+	* @throws java.lang.Exception
 	*/
 	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
 	public com.liferay.docs.course.model.Course deleteCourse(long courseId)
 		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
+			com.liferay.portal.kernel.exception.SystemException,
+			java.lang.Exception;
 
 	/**
 	* Deletes the course from the database. Also notifies the appropriate model listeners.
@@ -259,6 +261,28 @@ public interface CourseLocalService extends BaseLocalService,
 	public com.liferay.docs.course.model.Course updateCourse(long courseId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String lecturer, int duration, boolean status)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.docs.course.model.Course updateStatusOfCourse(
+		long courseId, boolean status)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<java.lang.Object> getCoursesWithTotalRegistration()
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.docs.course.model.Course> getCoursesByStatus(
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int countCoursesByStatus()
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.docs.course.model.Course getCourseById(long courseId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 }

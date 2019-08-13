@@ -19,24 +19,24 @@ import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.service.InvokableService;
 
 /**
- * Provides the remote service utility for Course. This utility wraps
- * {@link com.liferay.docs.course.service.impl.CourseServiceImpl} and is the
+ * Provides the remote service utility for Registration. This utility wraps
+ * {@link com.liferay.docs.course.service.impl.RegistrationServiceImpl} and is the
  * primary access point for service operations in application layer code running
  * on a remote server. Methods of this service are expected to have security
  * checks based on the propagated JAAS credentials because this service can be
  * accessed remotely.
  *
  * @author to.trinh
- * @see CourseService
- * @see com.liferay.docs.course.service.base.CourseServiceBaseImpl
- * @see com.liferay.docs.course.service.impl.CourseServiceImpl
+ * @see RegistrationService
+ * @see com.liferay.docs.course.service.base.RegistrationServiceBaseImpl
+ * @see com.liferay.docs.course.service.impl.RegistrationServiceImpl
  * @generated
  */
-public class CourseServiceUtil {
+public class RegistrationServiceUtil {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this class directly. Add custom service methods to {@link com.liferay.docs.course.service.impl.CourseServiceImpl} and rerun ServiceBuilder to regenerate this class.
+	 * Never modify this class directly. Add custom service methods to {@link com.liferay.docs.course.service.impl.RegistrationServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
 
 	/**
@@ -63,75 +63,54 @@ public class CourseServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
-	public static com.liferay.docs.course.model.Course addCourse(
-		java.lang.String name, java.lang.String description,
-		java.lang.String lecturer, int duration, boolean status,
+	public static com.liferay.docs.course.model.Registration addRegistration(
+		long courseId, long userId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .addCourse(name, description, lecturer, duration, status,
-			serviceContext);
+		return getService().addRegistration(courseId, userId, serviceContext);
 	}
 
-	public static com.liferay.docs.course.model.Course updateCourse(
-		long courseId, java.lang.String name, java.lang.String description,
-		java.lang.String lecturer, int duration, boolean status,
+	public static com.liferay.docs.course.model.Registration approveRegistration(
+		long registrationId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .updateCourse(courseId, name, description, lecturer,
-			duration, status, serviceContext);
+		return getService().approveRegistration(registrationId, serviceContext);
 	}
 
-	public static com.liferay.docs.course.model.Course updateStatusOfCourse(
-		long groupId, long courseId, boolean status)
+	public static com.liferay.docs.course.model.Registration rejectRegistration(
+		long registrationId,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().updateStatusOfCourse(groupId, courseId, status);
+		return getService().rejectRegistration(registrationId, serviceContext);
 	}
 
-	public static com.liferay.docs.course.model.Course getCourse(long courseId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getCourse(courseId);
-	}
-
-	public static com.liferay.docs.course.model.Course deleteCourse(
-		long courseId, com.liferay.portal.service.ServiceContext serviceContext)
+	public static com.liferay.docs.course.model.Registration deleteRegistration(
+		long registrationId,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws java.lang.Exception {
-		return getService().deleteCourse(courseId, serviceContext);
-	}
-
-	public static com.liferay.docs.course.model.Course _updateCourse(
-		long courseId, java.lang.String name, java.lang.String description,
-		java.lang.String lecturer, int duration, boolean status,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   ._updateCourse(courseId, name, description, lecturer,
-			duration, status, serviceContext);
+		return getService().deleteRegistration(registrationId, serviceContext);
 	}
 
 	public static void clearService() {
 		_service = null;
 	}
 
-	public static CourseService getService() {
+	public static RegistrationService getService() {
 		if (_service == null) {
 			InvokableService invokableService = (InvokableService)PortletBeanLocatorUtil.locate(ClpSerializer.getServletContextName(),
-					CourseService.class.getName());
+					RegistrationService.class.getName());
 
-			if (invokableService instanceof CourseService) {
-				_service = (CourseService)invokableService;
+			if (invokableService instanceof RegistrationService) {
+				_service = (RegistrationService)invokableService;
 			}
 			else {
-				_service = new CourseServiceClp(invokableService);
+				_service = new RegistrationServiceClp(invokableService);
 			}
 
-			ReferenceRegistry.registerReference(CourseServiceUtil.class,
+			ReferenceRegistry.registerReference(RegistrationServiceUtil.class,
 				"_service");
 		}
 
@@ -141,8 +120,8 @@ public class CourseServiceUtil {
 	/**
 	 * @deprecated As of 6.2.0
 	 */
-	public void setService(CourseService service) {
+	public void setService(RegistrationService service) {
 	}
 
-	private static CourseService _service;
+	private static RegistrationService _service;
 }
