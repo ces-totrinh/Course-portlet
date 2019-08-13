@@ -14,12 +14,13 @@
 
 package com.liferay.docs.course.service.impl;
 
+import java.util.List;
+
 import com.liferay.docs.course.model.Course;
 import com.liferay.docs.course.service.base.CourseLocalServiceBaseImpl;
+import com.liferay.docs.course.service.persistence.CourseFinderUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.service.ServiceContext;
 
 /**
  * The implementation of the course local service.
@@ -43,7 +44,7 @@ public class CourseLocalServiceImpl extends CourseLocalServiceBaseImpl {
 	 */
 	
 	public Course addCourse(String name, String description, String lecturer, int duration, boolean status) throws PortalException, SystemException {
-		long courseId = counterLocalService.increment();
+		long courseId = counterLocalService.increment(Course.class.getName());
 		Course course = coursePersistence.create(courseId);
 		
 		course.setName(name);
@@ -53,9 +54,9 @@ public class CourseLocalServiceImpl extends CourseLocalServiceBaseImpl {
 		course.setStatus(status);
 		
 		super.addCourse(course);
-		
 		return course;
 	}
+
 	
 	public Course updateCourse(long courseId, String name, String description, String lecturer, int duration, boolean status) throws PortalException, SystemException {
 		Course course = coursePersistence.findByPrimaryKey(courseId);
@@ -67,14 +68,38 @@ public class CourseLocalServiceImpl extends CourseLocalServiceBaseImpl {
 		course.setStatus(status);
 		
 		super.updateCourse(course);
+		return course;
+	}
+	
+	public Course updateStatusOfCourse(long courseId, boolean status) throws PortalException, SystemException {
+		Course course = coursePersistence.findByPrimaryKey(courseId);
+		course.setStatus(status);
+		
+		super.updateCourse(course);
 		
 		return course;
 	}
+	
 	public Course deleteCourse(Course course) throws SystemException {
 		return coursePersistence.remove(course);
 	}
-	public Course deleteCourse(long courseId) throws SystemException {
+	public Course deleteCourse(long courseId) throws Exception {
 		Course course = coursePersistence.fetchByPrimaryKey(courseId);
 		return deleteCourse(course);
+	}
+	public List<Object> getCoursesWithTotalRegistration() throws SystemException {
+		return CourseFinderUtil.getCoursesWithTotalRegistration();
+	}
+	
+	public List<Course> getCoursesByStatus(int start, int end) throws SystemException {	
+		return coursePersistence.findByStatus(true, start, end);	
+	}
+	
+	public int countCoursesByStatus() throws SystemException {	
+		return coursePersistence.countByStatus(true);
+	}
+	
+	public Course getCourseById(long courseId) throws PortalException, SystemException {
+		return coursePersistence.findByPrimaryKey(courseId);
 	}
 }
