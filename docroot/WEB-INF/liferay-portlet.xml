@@ -10,13 +10,46 @@
 		<css-class-wrapper>Course-portlet</css-class-wrapper>
 	</portlet>
 	<portlet>
-		<portlet-name>course-porlet</portlet-name>
+		<portlet-name>course-portlet</portlet-name>
 		<icon>/icon.png</icon>
 		<header-portlet-css>/css/main.css</header-portlet-css>
 		<footer-portlet-javascript>
 			/js/main.js
 		</footer-portlet-javascript>
 		<css-class-wrapper>course-portlet</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>registration-approval</portlet-name>
+		<icon>/icon.png</icon>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>
+			registration-approval-portlet
+		</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>course-registration</portlet-name>
+		<icon>/icon.png</icon>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>
+			course-registration-portlet
+		</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>registration-management</portlet-name>
+		<icon>/icon.png</icon>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>
+			registration-management-portlet
+		</css-class-wrapper>
 	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
@@ -33,5 +66,9 @@
 	<role-mapper>
 		<role-name>user</role-name>
 		<role-link>User</role-link>
+	</role-mapper>
+	<role-mapper>
+	    <role-name>staff</role-name>
+	    <role-link>Staff</role-link>
 	</role-mapper>
 </liferay-portlet-app>

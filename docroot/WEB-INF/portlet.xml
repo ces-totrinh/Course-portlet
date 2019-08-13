@@ -32,7 +32,7 @@
 		</security-role-ref>
 	</portlet>
 	<portlet>
-		<portlet-name>course-porlet</portlet-name>
+		<portlet-name>course-portlet</portlet-name>
 		<display-name>Course management</display-name>
 		<portlet-class>
 			com.liferay.docs.course.portlet.CoursePortlet
@@ -49,6 +49,111 @@
 		<portlet-info>
 			<title>Course management</title>
 			<short-title>Course management</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>staff</role-name>
+		</security-role-ref>
+	</portlet>
+	<portlet>
+		<portlet-name>registration-approval</portlet-name>
+		<display-name>Registration Approval</display-name>
+		<portlet-class>
+			com.liferay.docs.course.portlet.RegistrationApproval
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/registrationapproval/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<portlet-info>
+			<title>Registration Approval</title>
+			<short-title>Registration Approval</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>staff</role-name>
+		</security-role-ref>
+	</portlet>
+	<portlet>
+		<portlet-name>course-registration</portlet-name>
+		<display-name>Course Registration</display-name>
+		<portlet-class>
+			com.liferay.docs.course.portlet.CourseRegistration
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/courseregistration/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<portlet-info>
+			<title>Course Registration</title>
+			<short-title>Course Registration</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	<portlet>
+		<portlet-name>registration-management</portlet-name>
+		<display-name>Registration Management</display-name>
+		<portlet-class>
+			com.liferay.docs.course.portlet.RegistrationManagement
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/registrationmanagement/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<portlet-info>
+			<title>Registration Management</title>
+			<short-title>Registration Management</short-title>
 			<keywords></keywords>
 		</portlet-info>
 		<security-role-ref>

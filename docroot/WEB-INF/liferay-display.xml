@@ -4,6 +4,9 @@
 <display>
 	<category name="category.sample">
 		<portlet id="Course" />
-		<portlet id="course-porlet"></portlet>
+		<portlet id="course-portlet"></portlet>
+		<portlet id="registration-approval"></portlet>
+		<portlet id="course-registration"></portlet>
+		<portlet id="registration-management"></portlet>
 	</category>
 </display>
