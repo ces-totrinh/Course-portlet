@@ -35,8 +35,7 @@
 			}
 		}
 		%>
-
-		<%= LanguageUtil.format(pageContext, "you-are-signed-in-as-x", signedInAs, false) %>
+		<liferay-ui:message key="you-are-signed-in-as-x"  arguments="<%=signedInAs %>" />
 	</c:when>
 	<c:otherwise>
 
