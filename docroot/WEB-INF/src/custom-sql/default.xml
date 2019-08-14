@@ -2,20 +2,13 @@
 <custom-sql>
 	<sql id="com.liferay.docs.course.service.persistence.CourseFinder.getCoursesWithTotalRegistration">
 		<![CDATA[
-			SELECT c.course_id as course_id,
-			c.course_name as course_name, 
-			c.course_lecturer as course_lecturer, 
-			COUNT(r.registration_id) as total_registration 
+			SELECT c.course_id AS course_id,
+			c.course_name AS course_name, 
+			c.course_lecturer AS course_lecturer, 
+			COUNT(r.registration_id) AS total_registration 
 			FROM course_tbl c 
 			INNER JOIN registration_tbl r ON c.course_id =r.course_id 
 			GROUP BY c.course_id, c.course_name, c.course_lecturer;
-		]]>
-	</sql>
-	<sql id="com.liferay.docs.course.service.persistence.RegistrationFinder.updateRegistrationsWithRejectedStatus">
-		<![CDATA[
-			UPDATE registration_tbl r
-			SET r.registration_status = -1
-			WHERE r.registration_status = 0 AND r.course_id = ?
 		]]>
 	</sql>
 </custom-sql>
