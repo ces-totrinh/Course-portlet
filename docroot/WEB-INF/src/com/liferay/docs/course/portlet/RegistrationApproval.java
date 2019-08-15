@@ -53,7 +53,7 @@ public class RegistrationApproval extends MVCPortlet {
 		PortletURL redirectURL = PortletURLFactoryUtil.create(PortalUtil.getHttpServletRequest(actionRequest),
 		portletName, themeDisplay.getLayout().getPlid(), PortletRequest.RENDER_PHASE);
 
-		redirectURL.setParameter("courseId", "" + courseId);
+		redirectURL.setParameter("courseId", String.valueOf(courseId));
 		redirectURL.setParameter("mvcPath", url);
 
 		actionResponse.sendRedirect(redirectURL.toString());
