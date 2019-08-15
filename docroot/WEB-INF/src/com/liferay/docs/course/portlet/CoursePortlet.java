@@ -47,6 +47,6 @@ public class CoursePortlet extends MVCPortlet {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 				Course.class.getName(), actionRequest);
 		
-		return CourseServiceUtil._updateCourse(courseId, name, description, lecturer, duration, status, serviceContext);
+		return CourseServiceUtil.updateCourse(courseId, name, description, lecturer, duration, status, serviceContext);
 	}
 }
