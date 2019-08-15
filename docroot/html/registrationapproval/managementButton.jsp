@@ -5,7 +5,7 @@
 	Object object =(Object) row.getObject();
 %>
 <portlet:renderURL var="managementURL">
-	<portlet:param name="courseId" value="<%=((Long) ((Object[])object)[0]).toString()%>"/>
+	<portlet:param name="courseId" value="<%=String.valueOf((Long) ((Object[])object)[0])%>"/>
 	<portlet:param name="mvcPath" value="/html/registrationapproval/registrationOfCourse.jsp"/>
 </portlet:renderURL>
 <aui:a cssClass="btn btn-default" href="${managementURL}">
