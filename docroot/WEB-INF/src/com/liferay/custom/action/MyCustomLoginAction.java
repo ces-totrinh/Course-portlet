@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.liferay.portal.kernel.events.ActionException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.struts.LastPath;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -40,17 +42,17 @@ public class MyCustomLoginAction extends Action {
 				session.setAttribute(WebKeys.LAST_PATH, privatelastPath);
 			}
 		} catch (Exception e) {
-			System.out.print(e);
+			_log.error(e.getMessage());
 		}
 	}
 
 	private boolean _isStaffRoleExisting(List<Role> roles) {
-		boolean result = false;
 		for (Role role : roles) {
 			if (role.getName().equals("Staff")) {
-				result = true;
+				return true;
 			}
 		}
-		return result;
+		return false;
 	}
+	private static final Log _log = LogFactoryUtil.getLog(MyCustomLoginAction.class);
 }
