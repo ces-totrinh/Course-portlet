@@ -347,7 +347,15 @@ public class CourseClp extends BaseModelImpl<Course> implements Course {
 	public int compareTo(Course course) {
 		int value = 0;
 
-		value = getName().compareTo(course.getName());
+		if (getStatus() == course.getStatus()) {
+			value = -1;
+		}
+		else if (getStatus() != course.getStatus()) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
 
 		if (value != 0) {
 			return value;

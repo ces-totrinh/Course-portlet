@@ -296,11 +296,18 @@ public class RegistrationLocalServiceWrapper implements RegistrationLocalService
 	}
 
 	@Override
-	public java.util.List<com.liferay.docs.course.model.Registration> getRegistrationByCourseId(
+	public java.util.List<com.liferay.docs.course.model.Registration> getRegistrationsByCourseId(
 		long courseId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _registrationLocalService.getRegistrationByCourseId(courseId,
+		return _registrationLocalService.getRegistrationsByCourseId(courseId,
 			start, end);
+	}
+
+	@Override
+	public java.util.List<com.liferay.docs.course.model.Registration> getRegistrationsByCourseId(
+		long courseId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _registrationLocalService.getRegistrationsByCourseId(courseId);
 	}
 
 	@Override
@@ -340,7 +347,7 @@ public class RegistrationLocalServiceWrapper implements RegistrationLocalService
 
 	@Override
 	public void updateRegistrationsWithRejectedStatus(long courseId)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws java.lang.Exception {
 		_registrationLocalService.updateRegistrationsWithRejectedStatus(courseId);
 	}
 

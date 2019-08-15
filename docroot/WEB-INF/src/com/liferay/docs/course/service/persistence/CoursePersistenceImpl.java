@@ -100,8 +100,7 @@ public class CoursePersistenceImpl extends BasePersistenceImpl<Course>
 			CourseModelImpl.FINDER_CACHE_ENABLED, CourseImpl.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByStatus",
 			new String[] { Boolean.class.getName() },
-			CourseModelImpl.STATUS_COLUMN_BITMASK |
-			CourseModelImpl.NAME_COLUMN_BITMASK);
+			CourseModelImpl.STATUS_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_STATUS = new FinderPath(CourseModelImpl.ENTITY_CACHE_ENABLED,
 			CourseModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByStatus",

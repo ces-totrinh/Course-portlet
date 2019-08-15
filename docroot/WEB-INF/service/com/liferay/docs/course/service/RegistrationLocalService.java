@@ -260,8 +260,13 @@ public interface RegistrationLocalService extends BaseLocalService,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.docs.course.model.Registration> getRegistrationByCourseId(
+	public java.util.List<com.liferay.docs.course.model.Registration> getRegistrationsByCourseId(
 		long courseId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.docs.course.model.Registration> getRegistrationsByCourseId(
+		long courseId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countRegistrationByCourseId(long courseId)
@@ -284,7 +289,7 @@ public interface RegistrationLocalService extends BaseLocalService,
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void updateRegistrationsWithRejectedStatus(long courseId)
-		throws com.liferay.portal.kernel.exception.SystemException;
+		throws java.lang.Exception;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.docs.course.model.Registration> getRegistrationByUserId(

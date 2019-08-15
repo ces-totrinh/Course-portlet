@@ -830,7 +830,7 @@ public class CourseLocalServiceClp implements CourseLocalService {
 
 	@Override
 	public java.util.List<java.lang.Object> getCoursesWithTotalRegistration()
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws java.lang.Exception {
 		Object returnObj = null;
 
 		try {
@@ -840,8 +840,8 @@ public class CourseLocalServiceClp implements CourseLocalService {
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
 
-			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
-				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			if (t instanceof java.lang.Exception) {
+				throw (java.lang.Exception)t;
 			}
 
 			if (t instanceof RuntimeException) {

@@ -57,17 +57,6 @@ public class CourseServiceWrapper implements CourseService,
 	}
 
 	@Override
-	public com.liferay.docs.course.model.Course addCourse(
-		java.lang.String name, java.lang.String description,
-		java.lang.String lecturer, int duration, boolean status,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _courseService.addCourse(name, description, lecturer, duration,
-			status, serviceContext);
-	}
-
-	@Override
 	public com.liferay.docs.course.model.Course updateCourse(long courseId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String lecturer, int duration, boolean status,
@@ -98,17 +87,6 @@ public class CourseServiceWrapper implements CourseService,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws java.lang.Exception {
 		return _courseService.deleteCourse(courseId, serviceContext);
-	}
-
-	@Override
-	public com.liferay.docs.course.model.Course _updateCourse(long courseId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String lecturer, int duration, boolean status,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _courseService._updateCourse(courseId, name, description,
-			lecturer, duration, status, serviceContext);
 	}
 
 	/**

@@ -8,5 +8,4 @@
 	<bean id="com.liferay.docs.course.service.RegistrationLocalService" class="com.liferay.docs.course.service.impl.RegistrationLocalServiceImpl" />
 	<bean id="com.liferay.docs.course.service.RegistrationService" class="com.liferay.docs.course.service.impl.RegistrationServiceImpl" />
 	<bean id="com.liferay.docs.course.service.persistence.RegistrationPersistence" class="com.liferay.docs.course.service.persistence.RegistrationPersistenceImpl" parent="basePersistence" />
-	<bean id="com.liferay.docs.course.service.persistence.RegistrationFinder" class="com.liferay.docs.course.service.persistence.RegistrationFinderImpl" parent="basePersistence" />
 </beans>

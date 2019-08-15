@@ -63,17 +63,6 @@ public class CourseServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
-	public static com.liferay.docs.course.model.Course addCourse(
-		java.lang.String name, java.lang.String description,
-		java.lang.String lecturer, int duration, boolean status,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .addCourse(name, description, lecturer, duration, status,
-			serviceContext);
-	}
-
 	public static com.liferay.docs.course.model.Course updateCourse(
 		long courseId, java.lang.String name, java.lang.String description,
 		java.lang.String lecturer, int duration, boolean status,
@@ -102,17 +91,6 @@ public class CourseServiceUtil {
 		long courseId, com.liferay.portal.service.ServiceContext serviceContext)
 		throws java.lang.Exception {
 		return getService().deleteCourse(courseId, serviceContext);
-	}
-
-	public static com.liferay.docs.course.model.Course _updateCourse(
-		long courseId, java.lang.String name, java.lang.String description,
-		java.lang.String lecturer, int duration, boolean status,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   ._updateCourse(courseId, name, description, lecturer,
-			duration, status, serviceContext);
 	}
 
 	public static void clearService() {

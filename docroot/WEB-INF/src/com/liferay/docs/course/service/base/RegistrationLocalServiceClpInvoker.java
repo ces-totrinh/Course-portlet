@@ -106,63 +106,67 @@ public class RegistrationLocalServiceClpInvoker {
 				"com.liferay.docs.course.model.Registration"
 			};
 
-		_methodName44 = "getBeanIdentifier";
+		_methodName42 = "getBeanIdentifier";
 
-		_methodParameterTypes44 = new String[] {  };
+		_methodParameterTypes42 = new String[] {  };
 
-		_methodName45 = "setBeanIdentifier";
+		_methodName43 = "setBeanIdentifier";
 
-		_methodParameterTypes45 = new String[] { "java.lang.String" };
+		_methodParameterTypes43 = new String[] { "java.lang.String" };
 
-		_methodName50 = "addRegistration";
+		_methodName48 = "addRegistration";
 
-		_methodParameterTypes50 = new String[] { "long", "long" };
+		_methodParameterTypes48 = new String[] { "long", "long" };
 
-		_methodName51 = "getRegistrationByCourseId";
+		_methodName49 = "getRegistrationsByCourseId";
 
-		_methodParameterTypes51 = new String[] { "long", "int", "int" };
+		_methodParameterTypes49 = new String[] { "long", "int", "int" };
 
-		_methodName52 = "countRegistrationByCourseId";
+		_methodName50 = "getRegistrationsByCourseId";
+
+		_methodParameterTypes50 = new String[] { "long" };
+
+		_methodName51 = "countRegistrationByCourseId";
+
+		_methodParameterTypes51 = new String[] { "long" };
+
+		_methodName52 = "countRegistrationApprovedByCourseId";
 
 		_methodParameterTypes52 = new String[] { "long" };
 
-		_methodName53 = "countRegistrationApprovedByCourseId";
+		_methodName53 = "approveRegistration";
 
 		_methodParameterTypes53 = new String[] { "long" };
 
-		_methodName54 = "approveRegistration";
+		_methodName54 = "rejectRegistration";
 
 		_methodParameterTypes54 = new String[] { "long" };
 
-		_methodName55 = "rejectRegistration";
+		_methodName55 = "countRegistrationByCourseIdAndUserId";
 
-		_methodParameterTypes55 = new String[] { "long" };
+		_methodParameterTypes55 = new String[] { "long", "long" };
 
-		_methodName56 = "countRegistrationByCourseIdAndUserId";
+		_methodName56 = "updateRegistrationsWithRejectedStatus";
 
-		_methodParameterTypes56 = new String[] { "long", "long" };
+		_methodParameterTypes56 = new String[] { "long" };
 
-		_methodName57 = "updateRegistrationsWithRejectedStatus";
+		_methodName57 = "getRegistrationByUserId";
 
 		_methodParameterTypes57 = new String[] { "long" };
 
-		_methodName58 = "getRegistrationByUserId";
+		_methodName58 = "countRegistrationByUserId";
 
 		_methodParameterTypes58 = new String[] { "long" };
 
-		_methodName59 = "countRegistrationByUserId";
+		_methodName59 = "deleteRegistration";
 
-		_methodParameterTypes59 = new String[] { "long" };
-
-		_methodName60 = "deleteRegistration";
-
-		_methodParameterTypes60 = new String[] {
+		_methodParameterTypes59 = new String[] {
 				"com.liferay.docs.course.model.Registration"
 			};
 
-		_methodName61 = "deleteRegistration";
+		_methodName60 = "deleteRegistration";
 
-		_methodParameterTypes61 = new String[] { "long" };
+		_methodParameterTypes60 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -254,81 +258,86 @@ public class RegistrationLocalServiceClpInvoker {
 			return RegistrationLocalServiceUtil.updateRegistration((com.liferay.docs.course.model.Registration)arguments[0]);
 		}
 
-		if (_methodName44.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes44, parameterTypes)) {
+		if (_methodName42.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes42, parameterTypes)) {
 			return RegistrationLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName45.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes45, parameterTypes)) {
+		if (_methodName43.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes43, parameterTypes)) {
 			RegistrationLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName50.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes50, parameterTypes)) {
+		if (_methodName48.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes48, parameterTypes)) {
 			return RegistrationLocalServiceUtil.addRegistration(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue());
 		}
 
-		if (_methodName51.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes51, parameterTypes)) {
-			return RegistrationLocalServiceUtil.getRegistrationByCourseId(((Long)arguments[0]).longValue(),
+		if (_methodName49.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes49, parameterTypes)) {
+			return RegistrationLocalServiceUtil.getRegistrationsByCourseId(((Long)arguments[0]).longValue(),
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue());
 		}
 
+		if (_methodName50.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes50, parameterTypes)) {
+			return RegistrationLocalServiceUtil.getRegistrationsByCourseId(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName51.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes51, parameterTypes)) {
+			return RegistrationLocalServiceUtil.countRegistrationByCourseId(((Long)arguments[0]).longValue());
+		}
+
 		if (_methodName52.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes52, parameterTypes)) {
-			return RegistrationLocalServiceUtil.countRegistrationByCourseId(((Long)arguments[0]).longValue());
+			return RegistrationLocalServiceUtil.countRegistrationApprovedByCourseId(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName53.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes53, parameterTypes)) {
-			return RegistrationLocalServiceUtil.countRegistrationApprovedByCourseId(((Long)arguments[0]).longValue());
+			return RegistrationLocalServiceUtil.approveRegistration(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName54.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes54, parameterTypes)) {
-			return RegistrationLocalServiceUtil.approveRegistration(((Long)arguments[0]).longValue());
+			return RegistrationLocalServiceUtil.rejectRegistration(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName55.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes55, parameterTypes)) {
-			return RegistrationLocalServiceUtil.rejectRegistration(((Long)arguments[0]).longValue());
-		}
-
-		if (_methodName56.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes56, parameterTypes)) {
 			return RegistrationLocalServiceUtil.countRegistrationByCourseIdAndUserId(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue());
 		}
 
-		if (_methodName57.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes57, parameterTypes)) {
+		if (_methodName56.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes56, parameterTypes)) {
 			RegistrationLocalServiceUtil.updateRegistrationsWithRejectedStatus(((Long)arguments[0]).longValue());
 
 			return null;
 		}
 
+		if (_methodName57.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes57, parameterTypes)) {
+			return RegistrationLocalServiceUtil.getRegistrationByUserId(((Long)arguments[0]).longValue());
+		}
+
 		if (_methodName58.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes58, parameterTypes)) {
-			return RegistrationLocalServiceUtil.getRegistrationByUserId(((Long)arguments[0]).longValue());
+			return RegistrationLocalServiceUtil.countRegistrationByUserId(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName59.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes59, parameterTypes)) {
-			return RegistrationLocalServiceUtil.countRegistrationByUserId(((Long)arguments[0]).longValue());
+			return RegistrationLocalServiceUtil.deleteRegistration((com.liferay.docs.course.model.Registration)arguments[0]);
 		}
 
 		if (_methodName60.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes60, parameterTypes)) {
-			return RegistrationLocalServiceUtil.deleteRegistration((com.liferay.docs.course.model.Registration)arguments[0]);
-		}
-
-		if (_methodName61.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes61, parameterTypes)) {
 			return RegistrationLocalServiceUtil.deleteRegistration(((Long)arguments[0]).longValue());
 		}
 
@@ -367,10 +376,14 @@ public class RegistrationLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName44;
-	private String[] _methodParameterTypes44;
-	private String _methodName45;
-	private String[] _methodParameterTypes45;
+	private String _methodName42;
+	private String[] _methodParameterTypes42;
+	private String _methodName43;
+	private String[] _methodParameterTypes43;
+	private String _methodName48;
+	private String[] _methodParameterTypes48;
+	private String _methodName49;
+	private String[] _methodParameterTypes49;
 	private String _methodName50;
 	private String[] _methodParameterTypes50;
 	private String _methodName51;
@@ -393,6 +406,4 @@ public class RegistrationLocalServiceClpInvoker {
 	private String[] _methodParameterTypes59;
 	private String _methodName60;
 	private String[] _methodParameterTypes60;
-	private String _methodName61;
-	private String[] _methodParameterTypes61;
 }

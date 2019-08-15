@@ -22,7 +22,7 @@ import com.liferay.portal.kernel.util.ReferenceRegistry;
  */
 public class CourseFinderUtil {
 	public static java.util.List<java.lang.Object> getCoursesWithTotalRegistration()
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws java.lang.Exception {
 		return getFinder().getCoursesWithTotalRegistration();
 	}
 

@@ -312,7 +312,7 @@ public class CourseLocalServiceWrapper implements CourseLocalService,
 
 	@Override
 	public java.util.List<java.lang.Object> getCoursesWithTotalRegistration()
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws java.lang.Exception {
 		return _courseLocalService.getCoursesWithTotalRegistration();
 	}
 

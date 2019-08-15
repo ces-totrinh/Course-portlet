@@ -119,41 +119,45 @@ public class RegistrationLocalServiceClp implements RegistrationLocalService {
 
 		_methodParameterTypes19 = new String[] { "long", "long" };
 
-		_methodName20 = "getRegistrationByCourseId";
+		_methodName20 = "getRegistrationsByCourseId";
 
 		_methodParameterTypes20 = new String[] { "long", "int", "int" };
 
-		_methodName21 = "countRegistrationByCourseId";
+		_methodName21 = "getRegistrationsByCourseId";
 
 		_methodParameterTypes21 = new String[] { "long" };
 
-		_methodName22 = "countRegistrationApprovedByCourseId";
+		_methodName22 = "countRegistrationByCourseId";
 
 		_methodParameterTypes22 = new String[] { "long" };
 
-		_methodName23 = "approveRegistration";
+		_methodName23 = "countRegistrationApprovedByCourseId";
 
 		_methodParameterTypes23 = new String[] { "long" };
 
-		_methodName24 = "rejectRegistration";
+		_methodName24 = "approveRegistration";
 
 		_methodParameterTypes24 = new String[] { "long" };
 
-		_methodName25 = "countRegistrationByCourseIdAndUserId";
+		_methodName25 = "rejectRegistration";
 
-		_methodParameterTypes25 = new String[] { "long", "long" };
+		_methodParameterTypes25 = new String[] { "long" };
 
-		_methodName26 = "updateRegistrationsWithRejectedStatus";
+		_methodName26 = "countRegistrationByCourseIdAndUserId";
 
-		_methodParameterTypes26 = new String[] { "long" };
+		_methodParameterTypes26 = new String[] { "long", "long" };
 
-		_methodName27 = "getRegistrationByUserId";
+		_methodName27 = "updateRegistrationsWithRejectedStatus";
 
 		_methodParameterTypes27 = new String[] { "long" };
 
-		_methodName28 = "countRegistrationByUserId";
+		_methodName28 = "getRegistrationByUserId";
 
 		_methodParameterTypes28 = new String[] { "long" };
+
+		_methodName29 = "countRegistrationByUserId";
+
+		_methodParameterTypes29 = new String[] { "long" };
 	}
 
 	@Override
@@ -741,7 +745,7 @@ public class RegistrationLocalServiceClp implements RegistrationLocalService {
 	}
 
 	@Override
-	public java.util.List<com.liferay.docs.course.model.Registration> getRegistrationByCourseId(
+	public java.util.List<com.liferay.docs.course.model.Registration> getRegistrationsByCourseId(
 		long courseId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
@@ -771,7 +775,8 @@ public class RegistrationLocalServiceClp implements RegistrationLocalService {
 	}
 
 	@Override
-	public int countRegistrationByCourseId(long courseId)
+	public java.util.List<com.liferay.docs.course.model.Registration> getRegistrationsByCourseId(
+		long courseId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
@@ -795,11 +800,11 @@ public class RegistrationLocalServiceClp implements RegistrationLocalService {
 			}
 		}
 
-		return ((Integer)returnObj).intValue();
+		return (java.util.List<com.liferay.docs.course.model.Registration>)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
-	public int countRegistrationApprovedByCourseId(long courseId)
+	public int countRegistrationByCourseId(long courseId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
@@ -827,22 +832,16 @@ public class RegistrationLocalServiceClp implements RegistrationLocalService {
 	}
 
 	@Override
-	public com.liferay.docs.course.model.Registration approveRegistration(
-		long registrationId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+	public int countRegistrationApprovedByCourseId(long courseId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName23,
-					_methodParameterTypes23, new Object[] { registrationId });
+					_methodParameterTypes23, new Object[] { courseId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
-
-			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
-				throw (com.liferay.portal.kernel.exception.PortalException)t;
-			}
 
 			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
 				throw (com.liferay.portal.kernel.exception.SystemException)t;
@@ -857,11 +856,11 @@ public class RegistrationLocalServiceClp implements RegistrationLocalService {
 			}
 		}
 
-		return (com.liferay.docs.course.model.Registration)ClpSerializer.translateOutput(returnObj);
+		return ((Integer)returnObj).intValue();
 	}
 
 	@Override
-	public com.liferay.docs.course.model.Registration rejectRegistration(
+	public com.liferay.docs.course.model.Registration approveRegistration(
 		long registrationId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -895,13 +894,47 @@ public class RegistrationLocalServiceClp implements RegistrationLocalService {
 	}
 
 	@Override
+	public com.liferay.docs.course.model.Registration rejectRegistration(
+		long registrationId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName25,
+					_methodParameterTypes25, new Object[] { registrationId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+				throw (com.liferay.portal.kernel.exception.PortalException)t;
+			}
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.liferay.docs.course.model.Registration)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
 	public int countRegistrationByCourseIdAndUserId(long courseId, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName25,
-					_methodParameterTypes25, new Object[] { courseId, userId });
+			returnObj = _invokableLocalService.invokeMethod(_methodName26,
+					_methodParameterTypes26, new Object[] { courseId, userId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -924,16 +957,16 @@ public class RegistrationLocalServiceClp implements RegistrationLocalService {
 
 	@Override
 	public void updateRegistrationsWithRejectedStatus(long courseId)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws java.lang.Exception {
 		try {
-			_invokableLocalService.invokeMethod(_methodName26,
-				_methodParameterTypes26, new Object[] { courseId });
+			_invokableLocalService.invokeMethod(_methodName27,
+				_methodParameterTypes27, new Object[] { courseId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
 
-			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
-				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			if (t instanceof java.lang.Exception) {
+				throw (java.lang.Exception)t;
 			}
 
 			if (t instanceof RuntimeException) {
@@ -952,8 +985,8 @@ public class RegistrationLocalServiceClp implements RegistrationLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName27,
-					_methodParameterTypes27, new Object[] { userId });
+			returnObj = _invokableLocalService.invokeMethod(_methodName28,
+					_methodParameterTypes28, new Object[] { userId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -980,8 +1013,8 @@ public class RegistrationLocalServiceClp implements RegistrationLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName28,
-					_methodParameterTypes28, new Object[] { userId });
+			returnObj = _invokableLocalService.invokeMethod(_methodName29,
+					_methodParameterTypes29, new Object[] { userId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -1059,4 +1092,6 @@ public class RegistrationLocalServiceClp implements RegistrationLocalService {
 	private String[] _methodParameterTypes27;
 	private String _methodName28;
 	private String[] _methodParameterTypes28;
+	private String _methodName29;
+	private String[] _methodParameterTypes29;
 }

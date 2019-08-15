@@ -18,7 +18,6 @@ import com.liferay.docs.course.model.Course;
 import com.liferay.docs.course.service.CourseLocalService;
 import com.liferay.docs.course.service.persistence.CourseFinder;
 import com.liferay.docs.course.service.persistence.CoursePersistence;
-import com.liferay.docs.course.service.persistence.RegistrationFinder;
 import com.liferay.docs.course.service.persistence.RegistrationPersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
@@ -409,24 +408,6 @@ public abstract class CourseLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
-	 * Returns the registration finder.
-	 *
-	 * @return the registration finder
-	 */
-	public RegistrationFinder getRegistrationFinder() {
-		return registrationFinder;
-	}
-
-	/**
-	 * Sets the registration finder.
-	 *
-	 * @param registrationFinder the registration finder
-	 */
-	public void setRegistrationFinder(RegistrationFinder registrationFinder) {
-		this.registrationFinder = registrationFinder;
-	}
-
-	/**
 	 * Returns the counter local service.
 	 *
 	 * @return the counter local service
@@ -616,8 +597,6 @@ public abstract class CourseLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected com.liferay.docs.course.service.RegistrationService registrationService;
 	@BeanReference(type = RegistrationPersistence.class)
 	protected RegistrationPersistence registrationPersistence;
-	@BeanReference(type = RegistrationFinder.class)
-	protected RegistrationFinder registrationFinder;
 	@BeanReference(type = com.liferay.counter.service.CounterLocalService.class)
 	protected com.liferay.counter.service.CounterLocalService counterLocalService;
 	@BeanReference(type = com.liferay.portal.service.ResourceLocalService.class)

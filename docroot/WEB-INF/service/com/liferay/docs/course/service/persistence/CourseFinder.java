@@ -19,5 +19,5 @@ package com.liferay.docs.course.service.persistence;
  */
 public interface CourseFinder {
 	public java.util.List<java.lang.Object> getCoursesWithTotalRegistration()
-		throws com.liferay.portal.kernel.exception.SystemException;
+		throws java.lang.Exception;
 }

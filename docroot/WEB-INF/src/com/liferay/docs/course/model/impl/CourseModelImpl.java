@@ -72,8 +72,8 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 		};
 	public static final String TABLE_SQL_CREATE = "create table course_tbl (course_id LONG not null primary key,course_name VARCHAR(75) null,course_description VARCHAR(2000) null,course_lecturer VARCHAR(75) null,course_duration INTEGER,course_status BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table course_tbl";
-	public static final String ORDER_BY_JPQL = " ORDER BY course.name ASC";
-	public static final String ORDER_BY_SQL = " ORDER BY course_tbl.course_name ASC";
+	public static final String ORDER_BY_JPQL = " ORDER BY course.status ASC";
+	public static final String ORDER_BY_SQL = " ORDER BY course_tbl.course_status ASC";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
@@ -87,7 +87,6 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 				"value.object.column.bitmask.enabled.com.liferay.docs.course.model.Course"),
 			true);
 	public static long STATUS_COLUMN_BITMASK = 1L;
-	public static long NAME_COLUMN_BITMASK = 2L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -245,8 +244,6 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 
 	@Override
 	public void setName(String name) {
-		_columnBitmask = -1L;
-
 		_name = name;
 	}
 
@@ -306,7 +303,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 
 	@Override
 	public void setStatus(boolean status) {
-		_columnBitmask |= STATUS_COLUMN_BITMASK;
+		_columnBitmask = -1L;
 
 		if (!_setOriginalStatus) {
 			_setOriginalStatus = true;
@@ -368,7 +365,15 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 	public int compareTo(Course course) {
 		int value = 0;
 
-		value = getName().compareTo(course.getName());
+		if (getStatus() == course.getStatus()) {
+			value = -1;
+		}
+		else if (getStatus() != course.getStatus()) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
 
 		if (value != 0) {
 			return value;

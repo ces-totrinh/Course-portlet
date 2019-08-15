@@ -271,7 +271,7 @@ public interface CourseLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<java.lang.Object> getCoursesWithTotalRegistration()
-		throws com.liferay.portal.kernel.exception.SystemException;
+		throws java.lang.Exception;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.docs.course.model.Course> getCoursesByStatus(

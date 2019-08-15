@@ -282,10 +282,16 @@ public class RegistrationLocalServiceUtil {
 		return getService().addRegistration(courseId, userId);
 	}
 
-	public static java.util.List<com.liferay.docs.course.model.Registration> getRegistrationByCourseId(
+	public static java.util.List<com.liferay.docs.course.model.Registration> getRegistrationsByCourseId(
 		long courseId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getRegistrationByCourseId(courseId, start, end);
+		return getService().getRegistrationsByCourseId(courseId, start, end);
+	}
+
+	public static java.util.List<com.liferay.docs.course.model.Registration> getRegistrationsByCourseId(
+		long courseId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getRegistrationsByCourseId(courseId);
 	}
 
 	public static int countRegistrationByCourseId(long courseId)
@@ -319,7 +325,7 @@ public class RegistrationLocalServiceUtil {
 	}
 
 	public static void updateRegistrationsWithRejectedStatus(long courseId)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws java.lang.Exception {
 		getService().updateRegistrationsWithRejectedStatus(courseId);
 	}
 

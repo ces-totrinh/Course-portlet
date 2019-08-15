@@ -32,41 +32,26 @@ public class CourseServiceClp implements CourseService {
 
 		_methodParameterTypes1 = new String[] { "java.lang.String" };
 
-		_methodName3 = "addCourse";
+		_methodName3 = "updateCourse";
 
 		_methodParameterTypes3 = new String[] {
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"int", "boolean", "com.liferay.portal.service.ServiceContext"
-			};
-
-		_methodName4 = "updateCourse";
-
-		_methodParameterTypes4 = new String[] {
 				"long", "java.lang.String", "java.lang.String",
 				"java.lang.String", "int", "boolean",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName5 = "updateStatusOfCourse";
+		_methodName4 = "updateStatusOfCourse";
 
-		_methodParameterTypes5 = new String[] { "long", "long", "boolean" };
+		_methodParameterTypes4 = new String[] { "long", "long", "boolean" };
 
-		_methodName6 = "getCourse";
+		_methodName5 = "getCourse";
 
-		_methodParameterTypes6 = new String[] { "long" };
+		_methodParameterTypes5 = new String[] { "long" };
 
-		_methodName7 = "deleteCourse";
+		_methodName6 = "deleteCourse";
 
-		_methodParameterTypes7 = new String[] {
+		_methodParameterTypes6 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
-			};
-
-		_methodName8 = "_updateCourse";
-
-		_methodParameterTypes8 = new String[] {
-				"long", "java.lang.String", "java.lang.String",
-				"java.lang.String", "int", "boolean",
-				"com.liferay.portal.service.ServiceContext"
 			};
 	}
 
@@ -121,7 +106,7 @@ public class CourseServiceClp implements CourseService {
 	}
 
 	@Override
-	public com.liferay.docs.course.model.Course addCourse(
+	public com.liferay.docs.course.model.Course updateCourse(long courseId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String lecturer, int duration, boolean status,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -132,55 +117,6 @@ public class CourseServiceClp implements CourseService {
 		try {
 			returnObj = _invokableService.invokeMethod(_methodName3,
 					_methodParameterTypes3,
-					new Object[] {
-						ClpSerializer.translateInput(name),
-						
-					ClpSerializer.translateInput(description),
-						
-					ClpSerializer.translateInput(lecturer),
-						
-					duration,
-						
-					status,
-						
-					ClpSerializer.translateInput(serviceContext)
-					});
-		}
-		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
-
-			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
-				throw (com.liferay.portal.kernel.exception.PortalException)t;
-			}
-
-			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
-				throw (com.liferay.portal.kernel.exception.SystemException)t;
-			}
-
-			if (t instanceof RuntimeException) {
-				throw (RuntimeException)t;
-			}
-			else {
-				throw new RuntimeException(t.getClass().getName() +
-					" is not a valid exception");
-			}
-		}
-
-		return (com.liferay.docs.course.model.Course)ClpSerializer.translateOutput(returnObj);
-	}
-
-	@Override
-	public com.liferay.docs.course.model.Course updateCourse(long courseId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String lecturer, int duration, boolean status,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		Object returnObj = null;
-
-		try {
-			returnObj = _invokableService.invokeMethod(_methodName4,
-					_methodParameterTypes4,
 					new Object[] {
 						courseId,
 						
@@ -228,8 +164,8 @@ public class CourseServiceClp implements CourseService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName5,
-					_methodParameterTypes5,
+			returnObj = _invokableService.invokeMethod(_methodName4,
+					_methodParameterTypes4,
 					new Object[] { groupId, courseId, status });
 		}
 		catch (Throwable t) {
@@ -262,8 +198,8 @@ public class CourseServiceClp implements CourseService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName6,
-					_methodParameterTypes6, new Object[] { courseId });
+			returnObj = _invokableService.invokeMethod(_methodName5,
+					_methodParameterTypes5, new Object[] { courseId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -295,8 +231,8 @@ public class CourseServiceClp implements CourseService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName7,
-					_methodParameterTypes7,
+			returnObj = _invokableService.invokeMethod(_methodName6,
+					_methodParameterTypes6,
 					new Object[] {
 						courseId,
 						
@@ -308,57 +244,6 @@ public class CourseServiceClp implements CourseService {
 
 			if (t instanceof java.lang.Exception) {
 				throw (java.lang.Exception)t;
-			}
-
-			if (t instanceof RuntimeException) {
-				throw (RuntimeException)t;
-			}
-			else {
-				throw new RuntimeException(t.getClass().getName() +
-					" is not a valid exception");
-			}
-		}
-
-		return (com.liferay.docs.course.model.Course)ClpSerializer.translateOutput(returnObj);
-	}
-
-	@Override
-	public com.liferay.docs.course.model.Course _updateCourse(long courseId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String lecturer, int duration, boolean status,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		Object returnObj = null;
-
-		try {
-			returnObj = _invokableService.invokeMethod(_methodName8,
-					_methodParameterTypes8,
-					new Object[] {
-						courseId,
-						
-					ClpSerializer.translateInput(name),
-						
-					ClpSerializer.translateInput(description),
-						
-					ClpSerializer.translateInput(lecturer),
-						
-					duration,
-						
-					status,
-						
-					ClpSerializer.translateInput(serviceContext)
-					});
-		}
-		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
-
-			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
-				throw (com.liferay.portal.kernel.exception.PortalException)t;
-			}
-
-			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
-				throw (com.liferay.portal.kernel.exception.SystemException)t;
 			}
 
 			if (t instanceof RuntimeException) {
@@ -386,8 +271,4 @@ public class CourseServiceClp implements CourseService {
 	private String[] _methodParameterTypes5;
 	private String _methodName6;
 	private String[] _methodParameterTypes6;
-	private String _methodName7;
-	private String[] _methodParameterTypes7;
-	private String _methodName8;
-	private String[] _methodParameterTypes8;
 }
