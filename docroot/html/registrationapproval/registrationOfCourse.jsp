@@ -18,7 +18,7 @@
 	/ 
 	<%=RegistrationLocalServiceUtil.countRegistrationByCourseId(courseId) %>
 <liferay-ui:search-container emptyResultsMessage="No result was found">
-	<liferay-ui:search-container-results results="<%= RegistrationLocalServiceUtil.getRegistrationByCourseId(courseId, searchContainer.getStart(), searchContainer.getEnd())%>" total="<%= RegistrationLocalServiceUtil.countRegistrationByCourseId(courseId) %>" />
+	<liferay-ui:search-container-results results="<%= RegistrationLocalServiceUtil.getRegistrationsByCourseId(courseId, searchContainer.getStart(), searchContainer.getEnd())%>" total="<%= RegistrationLocalServiceUtil.countRegistrationByCourseId(courseId) %>" />
 	<liferay-ui:search-container-row 
 		className="com.liferay.docs.course.model.Registration" modelVar="registration" escapedModel="<%= true %>">
 		<liferay-ui:search-container-column-text name="User Name"
