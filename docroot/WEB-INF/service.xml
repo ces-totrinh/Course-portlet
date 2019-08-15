@@ -21,7 +21,7 @@
 		
 		<!-- Order -->
 		<order by="asc">
-			<order-column name="name" />
+			<order-column name="status" />
 		</order>
 		
 		<!-- Finder -->
