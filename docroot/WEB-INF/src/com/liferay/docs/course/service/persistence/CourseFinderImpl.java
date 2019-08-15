@@ -8,16 +8,12 @@ import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
 public class CourseFinderImpl extends BasePersistenceImpl<Course> implements CourseFinder {
 
-	public List<Object> getCoursesWithTotalRegistration()
-			throws SystemException {
-		
+	public List<Object> getCoursesWithTotalRegistration() throws Exception {
 		Session session = null;
-		try {
 			session = openSession();
 			String sql = CustomSQLUtil.get(GET_COURSE_WITH_TOTAL_REGISTRAION);
 			SQLQuery query = session.createSQLQuery(sql);
@@ -29,10 +25,6 @@ public class CourseFinderImpl extends BasePersistenceImpl<Course> implements Cou
 			query.addScalar("total_registration", Type.INTEGER);
 			QueryPos qPos = QueryPos.getInstance(query);
 			return (List<Object>) query.list();
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
 	}
 
 	public static final String GET_COURSE_WITH_TOTAL_REGISTRAION = CourseFinder.class
