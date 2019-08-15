@@ -17,8 +17,8 @@ package com.liferay.docs.course.service.impl;
 import java.util.List;
 
 import com.liferay.docs.course.model.Course;
+import com.liferay.docs.course.model.Registration;
 import com.liferay.docs.course.service.base.CourseLocalServiceBaseImpl;
-import com.liferay.docs.course.service.persistence.CourseFinderUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 
@@ -53,7 +53,7 @@ public class CourseLocalServiceImpl extends CourseLocalServiceBaseImpl {
 		course.setLecturer(lecturer);
 		course.setStatus(status);
 		
-		super.addCourse(course);
+		courseLocalService.addCourse(course);
 		return course;
 	}
 
@@ -67,16 +67,14 @@ public class CourseLocalServiceImpl extends CourseLocalServiceBaseImpl {
 		course.setLecturer(lecturer);
 		course.setStatus(status);
 		
-		super.updateCourse(course);
+		courseLocalService.updateCourse(course);
 		return course;
 	}
 	
 	public Course updateStatusOfCourse(long courseId, boolean status) throws PortalException, SystemException {
 		Course course = coursePersistence.findByPrimaryKey(courseId);
 		course.setStatus(status);
-		
-		super.updateCourse(course);
-		
+		courseLocalService.updateCourse(course);
 		return course;
 	}
 	
@@ -85,10 +83,14 @@ public class CourseLocalServiceImpl extends CourseLocalServiceBaseImpl {
 	}
 	public Course deleteCourse(long courseId) throws Exception {
 		Course course = coursePersistence.fetchByPrimaryKey(courseId);
+		List<Registration> registrations = registrationLocalService.getRegistrationsByCourseId(courseId);
+		for (Registration r : registrations) {
+			registrationLocalService.deleteRegistration(r.getRegistrationId());
+		}
 		return deleteCourse(course);
 	}
-	public List<Object> getCoursesWithTotalRegistration() throws SystemException {
-		return CourseFinderUtil.getCoursesWithTotalRegistration();
+	public List<Object> getCoursesWithTotalRegistration() throws Exception {
+		return courseFinder.getCoursesWithTotalRegistration();
 	}
 	
 	public List<Course> getCoursesByStatus(int start, int end) throws SystemException {	

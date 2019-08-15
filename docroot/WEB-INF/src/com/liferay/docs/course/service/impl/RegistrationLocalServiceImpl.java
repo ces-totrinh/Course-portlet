@@ -18,7 +18,6 @@ import java.util.List;
 
 import com.liferay.docs.course.model.Registration;
 import com.liferay.docs.course.service.base.RegistrationLocalServiceBaseImpl;
-import com.liferay.docs.course.service.persistence.RegistrationFinderUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 
@@ -56,12 +55,16 @@ public class RegistrationLocalServiceImpl extends RegistrationLocalServiceBaseIm
 		registration.setUserId(userId);
 		registration.setStatus(WAITING_APPROVAL);
 		
-		super.addRegistration(registration);
+		registrationLocalService.addRegistration(registration);
 		return registration;
 	}
 	
-	public List<Registration> getRegistrationByCourseId(long courseId, int start, int end) throws SystemException {
+	public List<Registration> getRegistrationsByCourseId(long courseId, int start, int end) throws SystemException {
 		return registrationPersistence.findByCourseId(courseId, start, end);
+	}
+	
+	public List<Registration> getRegistrationsByCourseId(long courseId) throws SystemException {
+		return registrationPersistence.findByCourseId(courseId);
 	}
 	
 	public int countRegistrationByCourseId(long courseId) throws SystemException {
@@ -83,11 +86,15 @@ public class RegistrationLocalServiceImpl extends RegistrationLocalServiceBaseIm
 		return registrationPersistence.countByCourseIdAndUserId(courseId, userId);
 	}
 	
-	public void updateRegistrationsWithRejectedStatus(long courseId) throws SystemException {
-		RegistrationFinderUtil.updateRegistrationsWithRejectedStatus(courseId);
+	public void updateRegistrationsWithRejectedStatus(long courseId) throws Exception {
+		List<Registration> registrations = registrationPersistence.findByCourseIdAndStatus(courseId, WAITING_APPROVAL);
+		for (Registration r : registrations) {
+			_updateRegistration(r.getRegistrationId(), STATUS_REJECTED);
+		}
 	}
 	
 	public List<Registration> getRegistrationByUserId(long userId) throws SystemException {
+		
 		return registrationPersistence.findByUserId(userId);
 	}
 	
@@ -103,16 +110,17 @@ public class RegistrationLocalServiceImpl extends RegistrationLocalServiceBaseIm
 		Registration registration = registrationPersistence.fetchByPrimaryKey(registrationId);
 		return deleteRegistration(registration);
 	}
-	public static final int WAITING_APPROVAL = 0;
-	public static final int STATUS_APPROVED = 1;
-	public static final int STATUS_REJECTED = -1;
 	
 	private Registration _updateRegistration(long registrationId, int status) throws PortalException, SystemException {
 		Registration registration = registrationPersistence.findByPrimaryKey(registrationId);
 		
 		registration.setStatus(status);
 		
-		super.updateRegistration(registration);
+		registrationLocalService.updateRegistration(registration);
 		return registration;
 	}
+
+	public static final int WAITING_APPROVAL = 0;
+	public static final int STATUS_APPROVED = 1;
+	public static final int STATUS_REJECTED = -1;
 }
