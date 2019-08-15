@@ -15,7 +15,6 @@
 package com.liferay.docs.course.service.impl;
 
 import com.liferay.docs.course.model.Registration;
-import com.liferay.docs.course.service.RegistrationLocalServiceUtil;
 import com.liferay.docs.course.service.base.RegistrationServiceBaseImpl;
 import com.liferay.docs.course.service.permission.ModelPermission;
 import com.liferay.docs.course.service.permission.RegistrationPermission;
@@ -46,20 +45,20 @@ public class RegistrationServiceImpl extends RegistrationServiceBaseImpl {
 	 */
 	public Registration addRegistration(long courseId, long userId, ServiceContext serviceContext) throws PortalException, SystemException {
 		ModelPermission.check(getPermissionChecker(), serviceContext.getScopeGroupId(), ActionKeys.ADD_REGISTRATION);
-		return RegistrationLocalServiceUtil.addRegistration(courseId, userId);
+		return registrationLocalService.addRegistration(courseId, userId);
 	}
 	public Registration approveRegistration(long registrationId, ServiceContext serviceContext) throws PortalException, SystemException {
 		RegistrationPermission.check(getPermissionChecker(), serviceContext.getScopeGroupId(), registrationId, ActionKeys.UPDATE_REGISTRATION);
-		return RegistrationLocalServiceUtil.approveRegistration(registrationId);
+		return registrationLocalService.approveRegistration(registrationId);
 	}
 	
 	public Registration rejectRegistration(long registrationId, ServiceContext serviceContext) throws PortalException, SystemException {
 		RegistrationPermission.check(getPermissionChecker(), serviceContext.getScopeGroupId(), registrationId, ActionKeys.UPDATE_REGISTRATION);
-		return RegistrationLocalServiceUtil.rejectRegistration(registrationId);
+		return registrationLocalService.rejectRegistration(registrationId);
 	}
 	
 	public Registration deleteRegistration(long registrationId, ServiceContext serviceContext) throws Exception {
 		RegistrationPermission.check(getPermissionChecker(), serviceContext.getScopeGroupId(), registrationId, ActionKeys.DELETE_REGISTRATION);
-		return RegistrationLocalServiceUtil.deleteRegistration(registrationId);
+		return registrationLocalService.deleteRegistration(registrationId);
 	}
 }
