@@ -4,6 +4,8 @@ import com.liferay.docs.course.model.Registration;
 import com.liferay.docs.course.service.CourseServiceUtil;
 import com.liferay.docs.course.service.RegistrationLocalServiceUtil;
 import com.liferay.portal.ModelListenerException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.BaseModelListener;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -23,11 +25,12 @@ public class MyRegistrationListener extends BaseModelListener<Registration>{
 			RegistrationLocalServiceUtil.updateRegistrationsWithRejectedStatus(courseId);
 			
 		} catch (Exception e) {
-			System.out.print(e);
+			_log.error(e.getMessage());
 		}
 		
 	}
 	
 	public static final boolean STATUS_UNAVAILALE_OF_COURSE = false;
 	public static final int MAXIMUM_NUMBER_OF_REGISTRATIONS_FOR_A_CLASS = 20;
+	private static final Log _log = LogFactoryUtil.getLog(MyRegistrationListener.class);
 }
