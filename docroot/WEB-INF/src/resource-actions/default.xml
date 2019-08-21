@@ -13,7 +13,6 @@
 			</supports>
 			<site-member-defaults>
 				<action-key>VIEW</action-key>
-				<action-key>ADD_COURSE</action-key>
 			</site-member-defaults>
 			<guest-defaults>
 				<action-key>VIEW</action-key>
