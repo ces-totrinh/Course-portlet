@@ -21,6 +21,8 @@ import com.liferay.docs.course.model.Registration;
 import com.liferay.docs.course.service.base.CourseLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 
 /**
  * The implementation of the course local service.
@@ -43,10 +45,11 @@ public class CourseLocalServiceImpl extends CourseLocalServiceBaseImpl {
 	 * Never reference this interface directly. Always use {@link com.liferay.docs.course.service.CourseLocalServiceUtil} to access the course local service.
 	 */
 	
-	public Course addCourse(String name, String description, String lecturer, int duration, boolean status) throws PortalException, SystemException {
+	public Course addCourse(long groupId, String name, String description, String lecturer, int duration, boolean status) throws PortalException, SystemException {
 		long courseId = counterLocalService.increment(Course.class.getName());
 		Course course = coursePersistence.create(courseId);
 		
+		course.setGroupId(groupId);
 		course.setName(name);
 		course.setDescription(description);
 		course.setDuration(duration);
@@ -54,6 +57,10 @@ public class CourseLocalServiceImpl extends CourseLocalServiceBaseImpl {
 		course.setStatus(status);
 		
 		courseLocalService.addCourse(course);
+		
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(Course.class);
+		indexer.reindex(course);
+		
 		return course;
 	}
 
@@ -68,6 +75,9 @@ public class CourseLocalServiceImpl extends CourseLocalServiceBaseImpl {
 		course.setStatus(status);
 		
 		courseLocalService.updateCourse(course);
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(Course.class);
+		indexer.reindex(course);
+		
 		return course;
 	}
 	
@@ -87,6 +97,8 @@ public class CourseLocalServiceImpl extends CourseLocalServiceBaseImpl {
 		for (Registration r : registrations) {
 			registrationLocalService.deleteRegistration(r.getRegistrationId());
 		}
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(Course.class);
+		indexer.delete(course);
 		return deleteCourse(course);
 	}
 	public List<Object> getCoursesWithTotalRegistration() throws Exception {
