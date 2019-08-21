@@ -252,7 +252,7 @@ public interface CourseLocalService extends BaseLocalService,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
 
-	public com.liferay.docs.course.model.Course addCourse(
+	public com.liferay.docs.course.model.Course addCourse(long groupId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String lecturer, int duration, boolean status)
 		throws com.liferay.portal.kernel.exception.PortalException,

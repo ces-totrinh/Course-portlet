@@ -283,13 +283,13 @@ public class CourseLocalServiceWrapper implements CourseLocalService,
 	}
 
 	@Override
-	public com.liferay.docs.course.model.Course addCourse(
+	public com.liferay.docs.course.model.Course addCourse(long groupId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String lecturer, int duration, boolean status)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _courseLocalService.addCourse(name, description, lecturer,
-			duration, status);
+		return _courseLocalService.addCourse(groupId, name, description,
+			lecturer, duration, status);
 	}
 
 	@Override

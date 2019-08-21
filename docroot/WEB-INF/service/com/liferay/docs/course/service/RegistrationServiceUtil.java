@@ -64,34 +64,29 @@ public class RegistrationServiceUtil {
 	}
 
 	public static com.liferay.docs.course.model.Registration addRegistration(
-		long courseId, long userId,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		long groupId, long courseId, long userId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().addRegistration(courseId, userId, serviceContext);
+		return getService().addRegistration(groupId, courseId, userId);
 	}
 
 	public static com.liferay.docs.course.model.Registration approveRegistration(
-		long registrationId,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		long registrationId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().approveRegistration(registrationId, serviceContext);
+		return getService().approveRegistration(registrationId);
 	}
 
 	public static com.liferay.docs.course.model.Registration rejectRegistration(
-		long registrationId,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		long registrationId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().rejectRegistration(registrationId, serviceContext);
+		return getService().rejectRegistration(registrationId);
 	}
 
 	public static com.liferay.docs.course.model.Registration deleteRegistration(
-		long registrationId,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws java.lang.Exception {
-		return getService().deleteRegistration(registrationId, serviceContext);
+		long registrationId) throws java.lang.Exception {
+		return getService().deleteRegistration(registrationId);
 	}
 
 	public static void clearService() {

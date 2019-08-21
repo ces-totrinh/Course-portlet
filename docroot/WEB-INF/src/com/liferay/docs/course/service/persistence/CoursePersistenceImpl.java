@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
-import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
@@ -43,7 +42,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnmodifiableList;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import java.io.Serializable;
@@ -504,317 +502,6 @@ public class CoursePersistenceImpl extends BasePersistenceImpl<Course>
 	}
 
 	/**
-	 * Returns all the courses that the user has permission to view where status = &#63;.
-	 *
-	 * @param status the status
-	 * @return the matching courses that the user has permission to view
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public List<Course> filterFindByStatus(boolean status)
-		throws SystemException {
-		return filterFindByStatus(status, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			null);
-	}
-
-	/**
-	 * Returns a range of all the courses that the user has permission to view where status = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.docs.course.model.impl.CourseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param status the status
-	 * @param start the lower bound of the range of courses
-	 * @param end the upper bound of the range of courses (not inclusive)
-	 * @return the range of matching courses that the user has permission to view
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public List<Course> filterFindByStatus(boolean status, int start, int end)
-		throws SystemException {
-		return filterFindByStatus(status, start, end, null);
-	}
-
-	/**
-	 * Returns an ordered range of all the courses that the user has permissions to view where status = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.docs.course.model.impl.CourseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param status the status
-	 * @param start the lower bound of the range of courses
-	 * @param end the upper bound of the range of courses (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching courses that the user has permission to view
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public List<Course> filterFindByStatus(boolean status, int start, int end,
-		OrderByComparator orderByComparator) throws SystemException {
-		if (!InlineSQLHelperUtil.isEnabled()) {
-			return findByStatus(status, start, end, orderByComparator);
-		}
-
-		StringBundler query = null;
-
-		if (orderByComparator != null) {
-			query = new StringBundler(3 +
-					(orderByComparator.getOrderByFields().length * 3));
-		}
-		else {
-			query = new StringBundler(3);
-		}
-
-		if (getDB().isSupportsInlineDistinct()) {
-			query.append(_FILTER_SQL_SELECT_COURSE_WHERE);
-		}
-		else {
-			query.append(_FILTER_SQL_SELECT_COURSE_NO_INLINE_DISTINCT_WHERE_1);
-		}
-
-		query.append(_FINDER_COLUMN_STATUS_STATUS_2_SQL);
-
-		if (!getDB().isSupportsInlineDistinct()) {
-			query.append(_FILTER_SQL_SELECT_COURSE_NO_INLINE_DISTINCT_WHERE_2);
-		}
-
-		if (orderByComparator != null) {
-			if (getDB().isSupportsInlineDistinct()) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator, true);
-			}
-			else {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
-					orderByComparator, true);
-			}
-		}
-		else {
-			if (getDB().isSupportsInlineDistinct()) {
-				query.append(CourseModelImpl.ORDER_BY_JPQL);
-			}
-			else {
-				query.append(CourseModelImpl.ORDER_BY_SQL);
-			}
-		}
-
-		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				Course.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			if (getDB().isSupportsInlineDistinct()) {
-				q.addEntity(_FILTER_ENTITY_ALIAS, CourseImpl.class);
-			}
-			else {
-				q.addEntity(_FILTER_ENTITY_TABLE, CourseImpl.class);
-			}
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(status);
-
-			return (List<Course>)QueryUtil.list(q, getDialect(), start, end);
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	/**
-	 * Returns the courses before and after the current course in the ordered set of courses that the user has permission to view where status = &#63;.
-	 *
-	 * @param courseId the primary key of the current course
-	 * @param status the status
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next course
-	 * @throws com.liferay.docs.course.NoSuchCourseException if a course with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public Course[] filterFindByStatus_PrevAndNext(long courseId,
-		boolean status, OrderByComparator orderByComparator)
-		throws NoSuchCourseException, SystemException {
-		if (!InlineSQLHelperUtil.isEnabled()) {
-			return findByStatus_PrevAndNext(courseId, status, orderByComparator);
-		}
-
-		Course course = findByPrimaryKey(courseId);
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			Course[] array = new CourseImpl[3];
-
-			array[0] = filterGetByStatus_PrevAndNext(session, course, status,
-					orderByComparator, true);
-
-			array[1] = course;
-
-			array[2] = filterGetByStatus_PrevAndNext(session, course, status,
-					orderByComparator, false);
-
-			return array;
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	protected Course filterGetByStatus_PrevAndNext(Session session,
-		Course course, boolean status, OrderByComparator orderByComparator,
-		boolean previous) {
-		StringBundler query = null;
-
-		if (orderByComparator != null) {
-			query = new StringBundler(6 +
-					(orderByComparator.getOrderByFields().length * 6));
-		}
-		else {
-			query = new StringBundler(3);
-		}
-
-		if (getDB().isSupportsInlineDistinct()) {
-			query.append(_FILTER_SQL_SELECT_COURSE_WHERE);
-		}
-		else {
-			query.append(_FILTER_SQL_SELECT_COURSE_NO_INLINE_DISTINCT_WHERE_1);
-		}
-
-		query.append(_FINDER_COLUMN_STATUS_STATUS_2_SQL);
-
-		if (!getDB().isSupportsInlineDistinct()) {
-			query.append(_FILTER_SQL_SELECT_COURSE_NO_INLINE_DISTINCT_WHERE_2);
-		}
-
-		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
-
-			if (orderByConditionFields.length > 0) {
-				query.append(WHERE_AND);
-			}
-
-			for (int i = 0; i < orderByConditionFields.length; i++) {
-				if (getDB().isSupportsInlineDistinct()) {
-					query.append(_ORDER_BY_ENTITY_ALIAS);
-				}
-				else {
-					query.append(_ORDER_BY_ENTITY_TABLE);
-				}
-
-				query.append(orderByConditionFields[i]);
-
-				if ((i + 1) < orderByConditionFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN_HAS_NEXT);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN);
-					}
-				}
-			}
-
-			query.append(ORDER_BY_CLAUSE);
-
-			String[] orderByFields = orderByComparator.getOrderByFields();
-
-			for (int i = 0; i < orderByFields.length; i++) {
-				if (getDB().isSupportsInlineDistinct()) {
-					query.append(_ORDER_BY_ENTITY_ALIAS);
-				}
-				else {
-					query.append(_ORDER_BY_ENTITY_TABLE);
-				}
-
-				query.append(orderByFields[i]);
-
-				if ((i + 1) < orderByFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC_HAS_NEXT);
-					}
-					else {
-						query.append(ORDER_BY_DESC_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC);
-					}
-					else {
-						query.append(ORDER_BY_DESC);
-					}
-				}
-			}
-		}
-		else {
-			if (getDB().isSupportsInlineDistinct()) {
-				query.append(CourseModelImpl.ORDER_BY_JPQL);
-			}
-			else {
-				query.append(CourseModelImpl.ORDER_BY_SQL);
-			}
-		}
-
-		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				Course.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
-
-		SQLQuery q = session.createSQLQuery(sql);
-
-		q.setFirstResult(0);
-		q.setMaxResults(2);
-
-		if (getDB().isSupportsInlineDistinct()) {
-			q.addEntity(_FILTER_ENTITY_ALIAS, CourseImpl.class);
-		}
-		else {
-			q.addEntity(_FILTER_ENTITY_TABLE, CourseImpl.class);
-		}
-
-		QueryPos qPos = QueryPos.getInstance(q);
-
-		qPos.add(status);
-
-		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(course);
-
-			for (Object value : values) {
-				qPos.add(value);
-			}
-		}
-
-		List<Course> list = q.list();
-
-		if (list.size() == 2) {
-			return list.get(1);
-		}
-		else {
-			return null;
-		}
-	}
-
-	/**
 	 * Removes all the courses where status = &#63; from the database.
 	 *
 	 * @param status the status
@@ -881,56 +568,7 @@ public class CoursePersistenceImpl extends BasePersistenceImpl<Course>
 		return count.intValue();
 	}
 
-	/**
-	 * Returns the number of courses that the user has permission to view where status = &#63;.
-	 *
-	 * @param status the status
-	 * @return the number of matching courses that the user has permission to view
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public int filterCountByStatus(boolean status) throws SystemException {
-		if (!InlineSQLHelperUtil.isEnabled()) {
-			return countByStatus(status);
-		}
-
-		StringBundler query = new StringBundler(2);
-
-		query.append(_FILTER_SQL_COUNT_COURSE_WHERE);
-
-		query.append(_FINDER_COLUMN_STATUS_STATUS_2_SQL);
-
-		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				Course.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addScalar(COUNT_COLUMN_NAME,
-				com.liferay.portal.kernel.dao.orm.Type.LONG);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(status);
-
-			Long count = (Long)q.uniqueResult();
-
-			return count.intValue();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	private static final String _FINDER_COLUMN_STATUS_STATUS_2 = "course.status = ?";
-	private static final String _FINDER_COLUMN_STATUS_STATUS_2_SQL = "course.course_status = ?";
 
 	public CoursePersistenceImpl() {
 		setModelClass(Course.class);
@@ -1187,6 +825,7 @@ public class CoursePersistenceImpl extends BasePersistenceImpl<Course>
 		courseImpl.setPrimaryKey(course.getPrimaryKey());
 
 		courseImpl.setCourseId(course.getCourseId());
+		courseImpl.setGroupId(course.getGroupId());
 		courseImpl.setName(course.getName());
 		courseImpl.setDescription(course.getDescription());
 		courseImpl.setLecturer(course.getLecturer());
@@ -1507,17 +1146,7 @@ public class CoursePersistenceImpl extends BasePersistenceImpl<Course>
 	private static final String _SQL_SELECT_COURSE_WHERE = "SELECT course FROM Course course WHERE ";
 	private static final String _SQL_COUNT_COURSE = "SELECT COUNT(course) FROM Course course";
 	private static final String _SQL_COUNT_COURSE_WHERE = "SELECT COUNT(course) FROM Course course WHERE ";
-	private static final String _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN = "course.course_id";
-	private static final String _FILTER_SQL_SELECT_COURSE_WHERE = "SELECT DISTINCT {course.*} FROM course_tbl course WHERE ";
-	private static final String _FILTER_SQL_SELECT_COURSE_NO_INLINE_DISTINCT_WHERE_1 =
-		"SELECT {course_tbl.*} FROM (SELECT DISTINCT course.course_id FROM course_tbl course WHERE ";
-	private static final String _FILTER_SQL_SELECT_COURSE_NO_INLINE_DISTINCT_WHERE_2 =
-		") TEMP_TABLE INNER JOIN course_tbl ON TEMP_TABLE.course_id = course_tbl.course_id";
-	private static final String _FILTER_SQL_COUNT_COURSE_WHERE = "SELECT COUNT(DISTINCT course.course_id) AS COUNT_VALUE FROM course_tbl course WHERE ";
-	private static final String _FILTER_ENTITY_ALIAS = "course";
-	private static final String _FILTER_ENTITY_TABLE = "course_tbl";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "course.";
-	private static final String _ORDER_BY_ENTITY_TABLE = "course_tbl.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Course exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No Course exists with the key {";
 	private static final boolean _HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE = GetterUtil.getBoolean(PropsUtil.get(

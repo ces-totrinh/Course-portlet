@@ -65,25 +65,20 @@ public interface RegistrationService extends BaseService, InvokableService {
 		throws java.lang.Throwable;
 
 	public com.liferay.docs.course.model.Registration addRegistration(
-		long courseId, long userId,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		long groupId, long courseId, long userId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.docs.course.model.Registration approveRegistration(
-		long registrationId,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		long registrationId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.docs.course.model.Registration rejectRegistration(
-		long registrationId,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		long registrationId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.docs.course.model.Registration deleteRegistration(
-		long registrationId,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws java.lang.Exception;
+		long registrationId) throws java.lang.Exception;
 }

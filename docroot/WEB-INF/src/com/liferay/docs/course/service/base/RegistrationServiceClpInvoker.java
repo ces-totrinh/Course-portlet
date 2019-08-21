@@ -34,27 +34,19 @@ public class RegistrationServiceClpInvoker {
 
 		_methodName32 = "addRegistration";
 
-		_methodParameterTypes32 = new String[] {
-				"long", "long", "com.liferay.portal.service.ServiceContext"
-			};
+		_methodParameterTypes32 = new String[] { "long", "long", "long" };
 
 		_methodName33 = "approveRegistration";
 
-		_methodParameterTypes33 = new String[] {
-				"long", "com.liferay.portal.service.ServiceContext"
-			};
+		_methodParameterTypes33 = new String[] { "long" };
 
 		_methodName34 = "rejectRegistration";
 
-		_methodParameterTypes34 = new String[] {
-				"long", "com.liferay.portal.service.ServiceContext"
-			};
+		_methodParameterTypes34 = new String[] { "long" };
 
 		_methodName35 = "deleteRegistration";
 
-		_methodParameterTypes35 = new String[] {
-				"long", "com.liferay.portal.service.ServiceContext"
-			};
+		_methodParameterTypes35 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -75,25 +67,22 @@ public class RegistrationServiceClpInvoker {
 				Arrays.deepEquals(_methodParameterTypes32, parameterTypes)) {
 			return RegistrationServiceUtil.addRegistration(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(),
-				(com.liferay.portal.service.ServiceContext)arguments[2]);
+				((Long)arguments[2]).longValue());
 		}
 
 		if (_methodName33.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes33, parameterTypes)) {
-			return RegistrationServiceUtil.approveRegistration(((Long)arguments[0]).longValue(),
-				(com.liferay.portal.service.ServiceContext)arguments[1]);
+			return RegistrationServiceUtil.approveRegistration(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName34.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes34, parameterTypes)) {
-			return RegistrationServiceUtil.rejectRegistration(((Long)arguments[0]).longValue(),
-				(com.liferay.portal.service.ServiceContext)arguments[1]);
+			return RegistrationServiceUtil.rejectRegistration(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName35.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes35, parameterTypes)) {
-			return RegistrationServiceUtil.deleteRegistration(((Long)arguments[0]).longValue(),
-				(com.liferay.portal.service.ServiceContext)arguments[1]);
+			return RegistrationServiceUtil.deleteRegistration(((Long)arguments[0]).longValue());
 		}
 
 		throw new UnsupportedOperationException();

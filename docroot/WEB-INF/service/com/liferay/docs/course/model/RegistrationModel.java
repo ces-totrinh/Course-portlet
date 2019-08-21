@@ -72,6 +72,20 @@ public interface RegistrationModel extends BaseModel<Registration> {
 	public void setRegistrationId(long registrationId);
 
 	/**
+	 * Returns the group ID of this registration.
+	 *
+	 * @return the group ID of this registration
+	 */
+	public long getGroupId();
+
+	/**
+	 * Sets the group ID of this registration.
+	 *
+	 * @param groupId the group ID of this registration
+	 */
+	public void setGroupId(long groupId);
+
+	/**
 	 * Returns the user ID of this registration.
 	 *
 	 * @return the user ID of this registration

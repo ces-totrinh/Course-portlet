@@ -117,8 +117,8 @@ public class CourseLocalServiceClpInvoker {
 		_methodName48 = "addCourse";
 
 		_methodParameterTypes48 = new String[] {
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"int", "boolean"
+				"long", "java.lang.String", "java.lang.String",
+				"java.lang.String", "int", "boolean"
 			};
 
 		_methodName49 = "updateCourse";
@@ -262,10 +262,11 @@ public class CourseLocalServiceClpInvoker {
 
 		if (_methodName48.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes48, parameterTypes)) {
-			return CourseLocalServiceUtil.addCourse((java.lang.String)arguments[0],
+			return CourseLocalServiceUtil.addCourse(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
-				((Integer)arguments[3]).intValue(),
-				((Boolean)arguments[4]).booleanValue());
+				(java.lang.String)arguments[3],
+				((Integer)arguments[4]).intValue(),
+				((Boolean)arguments[5]).booleanValue());
 		}
 
 		if (_methodName49.equals(name) &&

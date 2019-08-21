@@ -255,7 +255,7 @@ public interface RegistrationLocalService extends BaseLocalService,
 		throws java.lang.Throwable;
 
 	public com.liferay.docs.course.model.Registration addRegistration(
-		long courseId, long userId)
+		long groupId, long courseId, long userId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

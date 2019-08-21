@@ -35,10 +35,12 @@ public class RegistrationCacheModel implements CacheModel<Registration>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(9);
+		StringBundler sb = new StringBundler(11);
 
 		sb.append("{registrationId=");
 		sb.append(registrationId);
+		sb.append(", groupId=");
+		sb.append(groupId);
 		sb.append(", userId=");
 		sb.append(userId);
 		sb.append(", courseId=");
@@ -55,6 +57,7 @@ public class RegistrationCacheModel implements CacheModel<Registration>,
 		RegistrationImpl registrationImpl = new RegistrationImpl();
 
 		registrationImpl.setRegistrationId(registrationId);
+		registrationImpl.setGroupId(groupId);
 		registrationImpl.setUserId(userId);
 		registrationImpl.setCourseId(courseId);
 		registrationImpl.setStatus(status);
@@ -67,6 +70,7 @@ public class RegistrationCacheModel implements CacheModel<Registration>,
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		registrationId = objectInput.readLong();
+		groupId = objectInput.readLong();
 		userId = objectInput.readLong();
 		courseId = objectInput.readLong();
 		status = objectInput.readInt();
@@ -76,12 +80,14 @@ public class RegistrationCacheModel implements CacheModel<Registration>,
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(registrationId);
+		objectOutput.writeLong(groupId);
 		objectOutput.writeLong(userId);
 		objectOutput.writeLong(courseId);
 		objectOutput.writeInt(status);
 	}
 
 	public long registrationId;
+	public long groupId;
 	public long userId;
 	public long courseId;
 	public int status;

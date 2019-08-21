@@ -117,8 +117,8 @@ public class CourseLocalServiceClp implements CourseLocalService {
 		_methodName19 = "addCourse";
 
 		_methodParameterTypes19 = new String[] {
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"int", "boolean"
+				"long", "java.lang.String", "java.lang.String",
+				"java.lang.String", "int", "boolean"
 			};
 
 		_methodName20 = "updateCourse";
@@ -701,7 +701,7 @@ public class CourseLocalServiceClp implements CourseLocalService {
 	}
 
 	@Override
-	public com.liferay.docs.course.model.Course addCourse(
+	public com.liferay.docs.course.model.Course addCourse(long groupId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String lecturer, int duration, boolean status)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -712,7 +712,9 @@ public class CourseLocalServiceClp implements CourseLocalService {
 			returnObj = _invokableLocalService.invokeMethod(_methodName19,
 					_methodParameterTypes19,
 					new Object[] {
-						ClpSerializer.translateInput(name),
+						groupId,
+						
+					ClpSerializer.translateInput(name),
 						
 					ClpSerializer.translateInput(description),
 						

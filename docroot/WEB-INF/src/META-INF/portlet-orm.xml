@@ -12,6 +12,7 @@
 			<id name="courseId">
 				<column name="COURSE_ID" />
 			</id>
+			<basic name="groupId" />
 			<basic name="name">
 				<column name="COURSE_NAME" />
 			</basic>
@@ -37,6 +38,7 @@
 			<id name="registrationId">
 				<column name="REGISTRATION_ID" />
 			</id>
+			<basic name="groupId" />
 			<basic name="userId">
 				<column name="USER_ID" />
 			</basic>

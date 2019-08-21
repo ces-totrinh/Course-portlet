@@ -34,27 +34,19 @@ public class RegistrationServiceClp implements RegistrationService {
 
 		_methodName3 = "addRegistration";
 
-		_methodParameterTypes3 = new String[] {
-				"long", "long", "com.liferay.portal.service.ServiceContext"
-			};
+		_methodParameterTypes3 = new String[] { "long", "long", "long" };
 
 		_methodName4 = "approveRegistration";
 
-		_methodParameterTypes4 = new String[] {
-				"long", "com.liferay.portal.service.ServiceContext"
-			};
+		_methodParameterTypes4 = new String[] { "long" };
 
 		_methodName5 = "rejectRegistration";
 
-		_methodParameterTypes5 = new String[] {
-				"long", "com.liferay.portal.service.ServiceContext"
-			};
+		_methodParameterTypes5 = new String[] { "long" };
 
 		_methodName6 = "deleteRegistration";
 
-		_methodParameterTypes6 = new String[] {
-				"long", "com.liferay.portal.service.ServiceContext"
-			};
+		_methodParameterTypes6 = new String[] { "long" };
 	}
 
 	@Override
@@ -109,8 +101,7 @@ public class RegistrationServiceClp implements RegistrationService {
 
 	@Override
 	public com.liferay.docs.course.model.Registration addRegistration(
-		long courseId, long userId,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		long groupId, long courseId, long userId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
@@ -118,13 +109,7 @@ public class RegistrationServiceClp implements RegistrationService {
 		try {
 			returnObj = _invokableService.invokeMethod(_methodName3,
 					_methodParameterTypes3,
-					new Object[] {
-						courseId,
-						
-					userId,
-						
-					ClpSerializer.translateInput(serviceContext)
-					});
+					new Object[] { groupId, courseId, userId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -151,20 +136,14 @@ public class RegistrationServiceClp implements RegistrationService {
 
 	@Override
 	public com.liferay.docs.course.model.Registration approveRegistration(
-		long registrationId,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		long registrationId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableService.invokeMethod(_methodName4,
-					_methodParameterTypes4,
-					new Object[] {
-						registrationId,
-						
-					ClpSerializer.translateInput(serviceContext)
-					});
+					_methodParameterTypes4, new Object[] { registrationId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -191,20 +170,14 @@ public class RegistrationServiceClp implements RegistrationService {
 
 	@Override
 	public com.liferay.docs.course.model.Registration rejectRegistration(
-		long registrationId,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		long registrationId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableService.invokeMethod(_methodName5,
-					_methodParameterTypes5,
-					new Object[] {
-						registrationId,
-						
-					ClpSerializer.translateInput(serviceContext)
-					});
+					_methodParameterTypes5, new Object[] { registrationId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -231,19 +204,12 @@ public class RegistrationServiceClp implements RegistrationService {
 
 	@Override
 	public com.liferay.docs.course.model.Registration deleteRegistration(
-		long registrationId,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws java.lang.Exception {
+		long registrationId) throws java.lang.Exception {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableService.invokeMethod(_methodName6,
-					_methodParameterTypes6,
-					new Object[] {
-						registrationId,
-						
-					ClpSerializer.translateInput(serviceContext)
-					});
+					_methodParameterTypes6, new Object[] { registrationId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);

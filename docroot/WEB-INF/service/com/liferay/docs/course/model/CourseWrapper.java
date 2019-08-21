@@ -49,6 +49,7 @@ public class CourseWrapper implements Course, ModelWrapper<Course> {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("courseId", getCourseId());
+		attributes.put("groupId", getGroupId());
 		attributes.put("name", getName());
 		attributes.put("description", getDescription());
 		attributes.put("lecturer", getLecturer());
@@ -64,6 +65,12 @@ public class CourseWrapper implements Course, ModelWrapper<Course> {
 
 		if (courseId != null) {
 			setCourseId(courseId);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
 		}
 
 		String name = (String)attributes.get("name");
@@ -135,6 +142,26 @@ public class CourseWrapper implements Course, ModelWrapper<Course> {
 	@Override
 	public void setCourseId(long courseId) {
 		_course.setCourseId(courseId);
+	}
+
+	/**
+	* Returns the group ID of this course.
+	*
+	* @return the group ID of this course
+	*/
+	@Override
+	public long getGroupId() {
+		return _course.getGroupId();
+	}
+
+	/**
+	* Sets the group ID of this course.
+	*
+	* @param groupId the group ID of this course
+	*/
+	@Override
+	public void setGroupId(long groupId) {
+		_course.setGroupId(groupId);
 	}
 
 	/**
@@ -349,6 +376,11 @@ public class CourseWrapper implements Course, ModelWrapper<Course> {
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_course.persist();
+	}
+
+	@Override
+	public long getCompanyId() {
+		return _course.getCompanyId();
 	}
 
 	@Override

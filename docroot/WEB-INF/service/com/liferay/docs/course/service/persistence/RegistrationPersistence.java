@@ -157,69 +157,6 @@ public interface RegistrationPersistence extends BasePersistence<Registration> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns all the registrations that the user has permission to view where courseId = &#63;.
-	*
-	* @param courseId the course ID
-	* @return the matching registrations that the user has permission to view
-	* @throws SystemException if a system exception occurred
-	*/
-	public java.util.List<com.liferay.docs.course.model.Registration> filterFindByCourseId(
-		long courseId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns a range of all the registrations that the user has permission to view where courseId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.docs.course.model.impl.RegistrationModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param courseId the course ID
-	* @param start the lower bound of the range of registrations
-	* @param end the upper bound of the range of registrations (not inclusive)
-	* @return the range of matching registrations that the user has permission to view
-	* @throws SystemException if a system exception occurred
-	*/
-	public java.util.List<com.liferay.docs.course.model.Registration> filterFindByCourseId(
-		long courseId, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns an ordered range of all the registrations that the user has permissions to view where courseId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.docs.course.model.impl.RegistrationModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param courseId the course ID
-	* @param start the lower bound of the range of registrations
-	* @param end the upper bound of the range of registrations (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching registrations that the user has permission to view
-	* @throws SystemException if a system exception occurred
-	*/
-	public java.util.List<com.liferay.docs.course.model.Registration> filterFindByCourseId(
-		long courseId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the registrations before and after the current registration in the ordered set of registrations that the user has permission to view where courseId = &#63;.
-	*
-	* @param registrationId the primary key of the current registration
-	* @param courseId the course ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the previous, current, and next registration
-	* @throws com.liferay.docs.course.NoSuchRegistrationException if a registration with the primary key could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.liferay.docs.course.model.Registration[] filterFindByCourseId_PrevAndNext(
-		long registrationId, long courseId,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.docs.course.NoSuchRegistrationException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	/**
 	* Removes all the registrations where courseId = &#63; from the database.
 	*
 	* @param courseId the course ID
@@ -236,16 +173,6 @@ public interface RegistrationPersistence extends BasePersistence<Registration> {
 	* @throws SystemException if a system exception occurred
 	*/
 	public int countByCourseId(long courseId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the number of registrations that the user has permission to view where courseId = &#63;.
-	*
-	* @param courseId the course ID
-	* @return the number of matching registrations that the user has permission to view
-	* @throws SystemException if a system exception occurred
-	*/
-	public int filterCountByCourseId(long courseId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
@@ -367,68 +294,6 @@ public interface RegistrationPersistence extends BasePersistence<Registration> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns all the registrations that the user has permission to view where userId = &#63;.
-	*
-	* @param userId the user ID
-	* @return the matching registrations that the user has permission to view
-	* @throws SystemException if a system exception occurred
-	*/
-	public java.util.List<com.liferay.docs.course.model.Registration> filterFindByUserId(
-		long userId) throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns a range of all the registrations that the user has permission to view where userId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.docs.course.model.impl.RegistrationModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param userId the user ID
-	* @param start the lower bound of the range of registrations
-	* @param end the upper bound of the range of registrations (not inclusive)
-	* @return the range of matching registrations that the user has permission to view
-	* @throws SystemException if a system exception occurred
-	*/
-	public java.util.List<com.liferay.docs.course.model.Registration> filterFindByUserId(
-		long userId, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns an ordered range of all the registrations that the user has permissions to view where userId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.docs.course.model.impl.RegistrationModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param userId the user ID
-	* @param start the lower bound of the range of registrations
-	* @param end the upper bound of the range of registrations (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching registrations that the user has permission to view
-	* @throws SystemException if a system exception occurred
-	*/
-	public java.util.List<com.liferay.docs.course.model.Registration> filterFindByUserId(
-		long userId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the registrations before and after the current registration in the ordered set of registrations that the user has permission to view where userId = &#63;.
-	*
-	* @param registrationId the primary key of the current registration
-	* @param userId the user ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the previous, current, and next registration
-	* @throws com.liferay.docs.course.NoSuchRegistrationException if a registration with the primary key could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.liferay.docs.course.model.Registration[] filterFindByUserId_PrevAndNext(
-		long registrationId, long userId,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.docs.course.NoSuchRegistrationException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	/**
 	* Removes all the registrations where userId = &#63; from the database.
 	*
 	* @param userId the user ID
@@ -445,16 +310,6 @@ public interface RegistrationPersistence extends BasePersistence<Registration> {
 	* @throws SystemException if a system exception occurred
 	*/
 	public int countByUserId(long userId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the number of registrations that the user has permission to view where userId = &#63;.
-	*
-	* @param userId the user ID
-	* @return the number of matching registrations that the user has permission to view
-	* @throws SystemException if a system exception occurred
-	*/
-	public int filterCountByUserId(long userId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
@@ -585,73 +440,6 @@ public interface RegistrationPersistence extends BasePersistence<Registration> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns all the registrations that the user has permission to view where courseId = &#63; and status = &#63;.
-	*
-	* @param courseId the course ID
-	* @param status the status
-	* @return the matching registrations that the user has permission to view
-	* @throws SystemException if a system exception occurred
-	*/
-	public java.util.List<com.liferay.docs.course.model.Registration> filterFindByCourseIdAndStatus(
-		long courseId, int status)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns a range of all the registrations that the user has permission to view where courseId = &#63; and status = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.docs.course.model.impl.RegistrationModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param courseId the course ID
-	* @param status the status
-	* @param start the lower bound of the range of registrations
-	* @param end the upper bound of the range of registrations (not inclusive)
-	* @return the range of matching registrations that the user has permission to view
-	* @throws SystemException if a system exception occurred
-	*/
-	public java.util.List<com.liferay.docs.course.model.Registration> filterFindByCourseIdAndStatus(
-		long courseId, int status, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns an ordered range of all the registrations that the user has permissions to view where courseId = &#63; and status = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.docs.course.model.impl.RegistrationModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param courseId the course ID
-	* @param status the status
-	* @param start the lower bound of the range of registrations
-	* @param end the upper bound of the range of registrations (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching registrations that the user has permission to view
-	* @throws SystemException if a system exception occurred
-	*/
-	public java.util.List<com.liferay.docs.course.model.Registration> filterFindByCourseIdAndStatus(
-		long courseId, int status, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the registrations before and after the current registration in the ordered set of registrations that the user has permission to view where courseId = &#63; and status = &#63;.
-	*
-	* @param registrationId the primary key of the current registration
-	* @param courseId the course ID
-	* @param status the status
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the previous, current, and next registration
-	* @throws com.liferay.docs.course.NoSuchRegistrationException if a registration with the primary key could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.liferay.docs.course.model.Registration[] filterFindByCourseIdAndStatus_PrevAndNext(
-		long registrationId, long courseId, int status,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.docs.course.NoSuchRegistrationException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	/**
 	* Removes all the registrations where courseId = &#63; and status = &#63; from the database.
 	*
 	* @param courseId the course ID
@@ -670,17 +458,6 @@ public interface RegistrationPersistence extends BasePersistence<Registration> {
 	* @throws SystemException if a system exception occurred
 	*/
 	public int countByCourseIdAndStatus(long courseId, int status)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the number of registrations that the user has permission to view where courseId = &#63; and status = &#63;.
-	*
-	* @param courseId the course ID
-	* @param status the status
-	* @return the number of matching registrations that the user has permission to view
-	* @throws SystemException if a system exception occurred
-	*/
-	public int filterCountByCourseIdAndStatus(long courseId, int status)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
@@ -811,73 +588,6 @@ public interface RegistrationPersistence extends BasePersistence<Registration> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns all the registrations that the user has permission to view where courseId = &#63; and userId = &#63;.
-	*
-	* @param courseId the course ID
-	* @param userId the user ID
-	* @return the matching registrations that the user has permission to view
-	* @throws SystemException if a system exception occurred
-	*/
-	public java.util.List<com.liferay.docs.course.model.Registration> filterFindByCourseIdAndUserId(
-		long courseId, long userId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns a range of all the registrations that the user has permission to view where courseId = &#63; and userId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.docs.course.model.impl.RegistrationModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param courseId the course ID
-	* @param userId the user ID
-	* @param start the lower bound of the range of registrations
-	* @param end the upper bound of the range of registrations (not inclusive)
-	* @return the range of matching registrations that the user has permission to view
-	* @throws SystemException if a system exception occurred
-	*/
-	public java.util.List<com.liferay.docs.course.model.Registration> filterFindByCourseIdAndUserId(
-		long courseId, long userId, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns an ordered range of all the registrations that the user has permissions to view where courseId = &#63; and userId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.docs.course.model.impl.RegistrationModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param courseId the course ID
-	* @param userId the user ID
-	* @param start the lower bound of the range of registrations
-	* @param end the upper bound of the range of registrations (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching registrations that the user has permission to view
-	* @throws SystemException if a system exception occurred
-	*/
-	public java.util.List<com.liferay.docs.course.model.Registration> filterFindByCourseIdAndUserId(
-		long courseId, long userId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the registrations before and after the current registration in the ordered set of registrations that the user has permission to view where courseId = &#63; and userId = &#63;.
-	*
-	* @param registrationId the primary key of the current registration
-	* @param courseId the course ID
-	* @param userId the user ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the previous, current, and next registration
-	* @throws com.liferay.docs.course.NoSuchRegistrationException if a registration with the primary key could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.liferay.docs.course.model.Registration[] filterFindByCourseIdAndUserId_PrevAndNext(
-		long registrationId, long courseId, long userId,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.docs.course.NoSuchRegistrationException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	/**
 	* Removes all the registrations where courseId = &#63; and userId = &#63; from the database.
 	*
 	* @param courseId the course ID
@@ -896,17 +606,6 @@ public interface RegistrationPersistence extends BasePersistence<Registration> {
 	* @throws SystemException if a system exception occurred
 	*/
 	public int countByCourseIdAndUserId(long courseId, long userId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the number of registrations that the user has permission to view where courseId = &#63; and userId = &#63;.
-	*
-	* @param courseId the course ID
-	* @param userId the user ID
-	* @return the number of matching registrations that the user has permission to view
-	* @throws SystemException if a system exception occurred
-	*/
-	public int filterCountByCourseIdAndUserId(long courseId, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**

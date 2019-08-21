@@ -31,6 +31,7 @@ public class CourseSoap implements Serializable {
 		CourseSoap soapModel = new CourseSoap();
 
 		soapModel.setCourseId(model.getCourseId());
+		soapModel.setGroupId(model.getGroupId());
 		soapModel.setName(model.getName());
 		soapModel.setDescription(model.getDescription());
 		soapModel.setLecturer(model.getLecturer());
@@ -96,6 +97,14 @@ public class CourseSoap implements Serializable {
 		_courseId = courseId;
 	}
 
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+	}
+
 	public String getName() {
 		return _name;
 	}
@@ -141,6 +150,7 @@ public class CourseSoap implements Serializable {
 	}
 
 	private long _courseId;
+	private long _groupId;
 	private String _name;
 	private String _description;
 	private String _lecturer;

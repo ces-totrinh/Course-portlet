@@ -58,41 +58,32 @@ public class RegistrationServiceWrapper implements RegistrationService,
 
 	@Override
 	public com.liferay.docs.course.model.Registration addRegistration(
-		long courseId, long userId,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		long groupId, long courseId, long userId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _registrationService.addRegistration(courseId, userId,
-			serviceContext);
+		return _registrationService.addRegistration(groupId, courseId, userId);
 	}
 
 	@Override
 	public com.liferay.docs.course.model.Registration approveRegistration(
-		long registrationId,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		long registrationId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _registrationService.approveRegistration(registrationId,
-			serviceContext);
+		return _registrationService.approveRegistration(registrationId);
 	}
 
 	@Override
 	public com.liferay.docs.course.model.Registration rejectRegistration(
-		long registrationId,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		long registrationId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _registrationService.rejectRegistration(registrationId,
-			serviceContext);
+		return _registrationService.rejectRegistration(registrationId);
 	}
 
 	@Override
 	public com.liferay.docs.course.model.Registration deleteRegistration(
-		long registrationId,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws java.lang.Exception {
-		return _registrationService.deleteRegistration(registrationId,
-			serviceContext);
+		long registrationId) throws java.lang.Exception {
+		return _registrationService.deleteRegistration(registrationId);
 	}
 
 	/**

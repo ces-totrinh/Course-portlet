@@ -50,6 +50,7 @@ public class RegistrationWrapper implements Registration,
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("registrationId", getRegistrationId());
+		attributes.put("groupId", getGroupId());
 		attributes.put("userId", getUserId());
 		attributes.put("courseId", getCourseId());
 		attributes.put("status", getStatus());
@@ -63,6 +64,12 @@ public class RegistrationWrapper implements Registration,
 
 		if (registrationId != null) {
 			setRegistrationId(registrationId);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
 		}
 
 		Long userId = (Long)attributes.get("userId");
@@ -122,6 +129,26 @@ public class RegistrationWrapper implements Registration,
 	@Override
 	public void setRegistrationId(long registrationId) {
 		_registration.setRegistrationId(registrationId);
+	}
+
+	/**
+	* Returns the group ID of this registration.
+	*
+	* @return the group ID of this registration
+	*/
+	@Override
+	public long getGroupId() {
+		return _registration.getGroupId();
+	}
+
+	/**
+	* Sets the group ID of this registration.
+	*
+	* @param groupId the group ID of this registration
+	*/
+	@Override
+	public void setGroupId(long groupId) {
+		_registration.setGroupId(groupId);
 	}
 
 	/**

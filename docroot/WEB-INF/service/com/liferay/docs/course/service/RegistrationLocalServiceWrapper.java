@@ -289,10 +289,11 @@ public class RegistrationLocalServiceWrapper implements RegistrationLocalService
 
 	@Override
 	public com.liferay.docs.course.model.Registration addRegistration(
-		long courseId, long userId)
+		long groupId, long courseId, long userId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _registrationLocalService.addRegistration(courseId, userId);
+		return _registrationLocalService.addRegistration(groupId, courseId,
+			userId);
 	}
 
 	@Override

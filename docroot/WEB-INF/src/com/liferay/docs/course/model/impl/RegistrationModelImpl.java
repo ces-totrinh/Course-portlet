@@ -65,11 +65,12 @@ public class RegistrationModelImpl extends BaseModelImpl<Registration>
 	public static final String TABLE_NAME = "registration_tbl";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "registration_id", Types.BIGINT },
+			{ "groupId", Types.BIGINT },
 			{ "user_id", Types.BIGINT },
 			{ "course_id", Types.BIGINT },
 			{ "registration_status", Types.INTEGER }
 		};
-	public static final String TABLE_SQL_CREATE = "create table registration_tbl (registration_id LONG not null primary key,user_id LONG,course_id LONG,registration_status INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table registration_tbl (registration_id LONG not null primary key,groupId LONG,user_id LONG,course_id LONG,registration_status INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table registration_tbl";
 	public static final String ORDER_BY_JPQL = " ORDER BY registration.status DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY registration_tbl.registration_status DESC";
@@ -103,6 +104,7 @@ public class RegistrationModelImpl extends BaseModelImpl<Registration>
 		Registration model = new RegistrationImpl();
 
 		model.setRegistrationId(soapModel.getRegistrationId());
+		model.setGroupId(soapModel.getGroupId());
 		model.setUserId(soapModel.getUserId());
 		model.setCourseId(soapModel.getCourseId());
 		model.setStatus(soapModel.getStatus());
@@ -171,6 +173,7 @@ public class RegistrationModelImpl extends BaseModelImpl<Registration>
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("registrationId", getRegistrationId());
+		attributes.put("groupId", getGroupId());
 		attributes.put("userId", getUserId());
 		attributes.put("courseId", getCourseId());
 		attributes.put("status", getStatus());
@@ -184,6 +187,12 @@ public class RegistrationModelImpl extends BaseModelImpl<Registration>
 
 		if (registrationId != null) {
 			setRegistrationId(registrationId);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
 		}
 
 		Long userId = (Long)attributes.get("userId");
@@ -214,6 +223,17 @@ public class RegistrationModelImpl extends BaseModelImpl<Registration>
 	@Override
 	public void setRegistrationId(long registrationId) {
 		_registrationId = registrationId;
+	}
+
+	@JSON
+	@Override
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	@Override
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
 	}
 
 	@JSON
@@ -327,6 +347,7 @@ public class RegistrationModelImpl extends BaseModelImpl<Registration>
 		RegistrationImpl registrationImpl = new RegistrationImpl();
 
 		registrationImpl.setRegistrationId(getRegistrationId());
+		registrationImpl.setGroupId(getGroupId());
 		registrationImpl.setUserId(getUserId());
 		registrationImpl.setCourseId(getCourseId());
 		registrationImpl.setStatus(getStatus());
@@ -411,6 +432,8 @@ public class RegistrationModelImpl extends BaseModelImpl<Registration>
 
 		registrationCacheModel.registrationId = getRegistrationId();
 
+		registrationCacheModel.groupId = getGroupId();
+
 		registrationCacheModel.userId = getUserId();
 
 		registrationCacheModel.courseId = getCourseId();
@@ -422,10 +445,12 @@ public class RegistrationModelImpl extends BaseModelImpl<Registration>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(9);
+		StringBundler sb = new StringBundler(11);
 
 		sb.append("{registrationId=");
 		sb.append(getRegistrationId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
 		sb.append(", userId=");
 		sb.append(getUserId());
 		sb.append(", courseId=");
@@ -439,7 +464,7 @@ public class RegistrationModelImpl extends BaseModelImpl<Registration>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(16);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.docs.course.model.Registration");
@@ -448,6 +473,10 @@ public class RegistrationModelImpl extends BaseModelImpl<Registration>
 		sb.append(
 			"<column><column-name>registrationId</column-name><column-value><![CDATA[");
 		sb.append(getRegistrationId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
@@ -472,6 +501,7 @@ public class RegistrationModelImpl extends BaseModelImpl<Registration>
 			Registration.class
 		};
 	private long _registrationId;
+	private long _groupId;
 	private long _userId;
 	private String _userUuid;
 	private long _originalUserId;

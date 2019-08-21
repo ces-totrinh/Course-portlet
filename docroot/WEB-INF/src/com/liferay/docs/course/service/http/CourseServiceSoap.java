@@ -63,14 +63,12 @@ import java.rmi.RemoteException;
  */
 public class CourseServiceSoap {
 	public static com.liferay.docs.course.model.CourseSoap updateCourse(
-		long courseId, java.lang.String name, java.lang.String description,
-		java.lang.String lecturer, int duration, boolean status,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws RemoteException {
+		long groupId, long courseId, java.lang.String name,
+		java.lang.String description, java.lang.String lecturer, int duration,
+		boolean status) throws RemoteException {
 		try {
-			com.liferay.docs.course.model.Course returnValue = CourseServiceUtil.updateCourse(courseId,
-					name, description, lecturer, duration, status,
-					serviceContext);
+			com.liferay.docs.course.model.Course returnValue = CourseServiceUtil.updateCourse(groupId,
+					courseId, name, description, lecturer, duration, status);
 
 			return com.liferay.docs.course.model.CourseSoap.toSoapModel(returnValue);
 		}
@@ -82,10 +80,10 @@ public class CourseServiceSoap {
 	}
 
 	public static com.liferay.docs.course.model.CourseSoap updateStatusOfCourse(
-		long groupId, long courseId, boolean status) throws RemoteException {
+		long courseId, boolean status) throws RemoteException {
 		try {
-			com.liferay.docs.course.model.Course returnValue = CourseServiceUtil.updateStatusOfCourse(groupId,
-					courseId, status);
+			com.liferay.docs.course.model.Course returnValue = CourseServiceUtil.updateStatusOfCourse(courseId,
+					status);
 
 			return com.liferay.docs.course.model.CourseSoap.toSoapModel(returnValue);
 		}
@@ -111,11 +109,9 @@ public class CourseServiceSoap {
 	}
 
 	public static com.liferay.docs.course.model.CourseSoap deleteCourse(
-		long courseId, com.liferay.portal.service.ServiceContext serviceContext)
-		throws RemoteException {
+		long courseId) throws RemoteException {
 		try {
-			com.liferay.docs.course.model.Course returnValue = CourseServiceUtil.deleteCourse(courseId,
-					serviceContext);
+			com.liferay.docs.course.model.Course returnValue = CourseServiceUtil.deleteCourse(courseId);
 
 			return com.liferay.docs.course.model.CourseSoap.toSoapModel(returnValue);
 		}

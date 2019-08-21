@@ -117,7 +117,7 @@ public class RegistrationLocalServiceClp implements RegistrationLocalService {
 
 		_methodName19 = "addRegistration";
 
-		_methodParameterTypes19 = new String[] { "long", "long" };
+		_methodParameterTypes19 = new String[] { "long", "long", "long" };
 
 		_methodName20 = "getRegistrationsByCourseId";
 
@@ -712,14 +712,15 @@ public class RegistrationLocalServiceClp implements RegistrationLocalService {
 
 	@Override
 	public com.liferay.docs.course.model.Registration addRegistration(
-		long courseId, long userId)
+		long groupId, long courseId, long userId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName19,
-					_methodParameterTypes19, new Object[] { courseId, userId });
+					_methodParameterTypes19,
+					new Object[] { groupId, courseId, userId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);

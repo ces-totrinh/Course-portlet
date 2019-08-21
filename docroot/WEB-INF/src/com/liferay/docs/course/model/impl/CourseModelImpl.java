@@ -64,13 +64,14 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 	public static final String TABLE_NAME = "course_tbl";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "course_id", Types.BIGINT },
+			{ "groupId", Types.BIGINT },
 			{ "course_name", Types.VARCHAR },
 			{ "course_description", Types.VARCHAR },
 			{ "course_lecturer", Types.VARCHAR },
 			{ "course_duration", Types.INTEGER },
 			{ "course_status", Types.BOOLEAN }
 		};
-	public static final String TABLE_SQL_CREATE = "create table course_tbl (course_id LONG not null primary key,course_name VARCHAR(75) null,course_description VARCHAR(2000) null,course_lecturer VARCHAR(75) null,course_duration INTEGER,course_status BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table course_tbl (course_id LONG not null primary key,groupId LONG,course_name VARCHAR(75) null,course_description VARCHAR(2000) null,course_lecturer VARCHAR(75) null,course_duration INTEGER,course_status BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table course_tbl";
 	public static final String ORDER_BY_JPQL = " ORDER BY course.status ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY course_tbl.course_status ASC";
@@ -102,6 +103,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 		Course model = new CourseImpl();
 
 		model.setCourseId(soapModel.getCourseId());
+		model.setGroupId(soapModel.getGroupId());
 		model.setName(soapModel.getName());
 		model.setDescription(soapModel.getDescription());
 		model.setLecturer(soapModel.getLecturer());
@@ -172,6 +174,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("courseId", getCourseId());
+		attributes.put("groupId", getGroupId());
 		attributes.put("name", getName());
 		attributes.put("description", getDescription());
 		attributes.put("lecturer", getLecturer());
@@ -187,6 +190,12 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 
 		if (courseId != null) {
 			setCourseId(courseId);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
 		}
 
 		String name = (String)attributes.get("name");
@@ -229,6 +238,17 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 	@Override
 	public void setCourseId(long courseId) {
 		_courseId = courseId;
+	}
+
+	@JSON
+	@Override
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	@Override
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
 	}
 
 	@JSON
@@ -350,6 +370,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 		CourseImpl courseImpl = new CourseImpl();
 
 		courseImpl.setCourseId(getCourseId());
+		courseImpl.setGroupId(getGroupId());
 		courseImpl.setName(getName());
 		courseImpl.setDescription(getDescription());
 		courseImpl.setLecturer(getLecturer());
@@ -426,6 +447,8 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 
 		courseCacheModel.courseId = getCourseId();
 
+		courseCacheModel.groupId = getGroupId();
+
 		courseCacheModel.name = getName();
 
 		String name = courseCacheModel.name;
@@ -459,10 +482,12 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(15);
 
 		sb.append("{courseId=");
 		sb.append(getCourseId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
 		sb.append(", name=");
 		sb.append(getName());
 		sb.append(", description=");
@@ -480,7 +505,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(22);
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.docs.course.model.Course");
@@ -489,6 +514,10 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 		sb.append(
 			"<column><column-name>courseId</column-name><column-value><![CDATA[");
 		sb.append(getCourseId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>name</column-name><column-value><![CDATA[");
@@ -519,6 +548,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 	private static ClassLoader _classLoader = Course.class.getClassLoader();
 	private static Class<?>[] _escapedModelInterfaces = new Class[] { Course.class };
 	private long _courseId;
+	private long _groupId;
 	private String _name;
 	private String _description;
 	private String _lecturer;

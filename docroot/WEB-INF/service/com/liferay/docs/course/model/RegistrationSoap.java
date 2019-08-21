@@ -31,6 +31,7 @@ public class RegistrationSoap implements Serializable {
 		RegistrationSoap soapModel = new RegistrationSoap();
 
 		soapModel.setRegistrationId(model.getRegistrationId());
+		soapModel.setGroupId(model.getGroupId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setCourseId(model.getCourseId());
 		soapModel.setStatus(model.getStatus());
@@ -94,6 +95,14 @@ public class RegistrationSoap implements Serializable {
 		_registrationId = registrationId;
 	}
 
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+	}
+
 	public long getUserId() {
 		return _userId;
 	}
@@ -119,6 +128,7 @@ public class RegistrationSoap implements Serializable {
 	}
 
 	private long _registrationId;
+	private long _groupId;
 	private long _userId;
 	private long _courseId;
 	private int _status;

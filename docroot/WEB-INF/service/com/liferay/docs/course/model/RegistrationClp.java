@@ -75,6 +75,7 @@ public class RegistrationClp extends BaseModelImpl<Registration>
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("registrationId", getRegistrationId());
+		attributes.put("groupId", getGroupId());
 		attributes.put("userId", getUserId());
 		attributes.put("courseId", getCourseId());
 		attributes.put("status", getStatus());
@@ -88,6 +89,12 @@ public class RegistrationClp extends BaseModelImpl<Registration>
 
 		if (registrationId != null) {
 			setRegistrationId(registrationId);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
 		}
 
 		Long userId = (Long)attributes.get("userId");
@@ -125,6 +132,29 @@ public class RegistrationClp extends BaseModelImpl<Registration>
 				Method method = clazz.getMethod("setRegistrationId", long.class);
 
 				method.invoke(_registrationRemoteModel, registrationId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	@Override
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+
+		if (_registrationRemoteModel != null) {
+			try {
+				Class<?> clazz = _registrationRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setGroupId", long.class);
+
+				method.invoke(_registrationRemoteModel, groupId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -281,6 +311,7 @@ public class RegistrationClp extends BaseModelImpl<Registration>
 		RegistrationClp clone = new RegistrationClp();
 
 		clone.setRegistrationId(getRegistrationId());
+		clone.setGroupId(getGroupId());
 		clone.setUserId(getUserId());
 		clone.setCourseId(getCourseId());
 		clone.setStatus(getStatus());
@@ -344,10 +375,12 @@ public class RegistrationClp extends BaseModelImpl<Registration>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(9);
+		StringBundler sb = new StringBundler(11);
 
 		sb.append("{registrationId=");
 		sb.append(getRegistrationId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
 		sb.append(", userId=");
 		sb.append(getUserId());
 		sb.append(", courseId=");
@@ -361,7 +394,7 @@ public class RegistrationClp extends BaseModelImpl<Registration>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(16);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.docs.course.model.Registration");
@@ -370,6 +403,10 @@ public class RegistrationClp extends BaseModelImpl<Registration>
 		sb.append(
 			"<column><column-name>registrationId</column-name><column-value><![CDATA[");
 		sb.append(getRegistrationId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
@@ -390,6 +427,7 @@ public class RegistrationClp extends BaseModelImpl<Registration>
 	}
 
 	private long _registrationId;
+	private long _groupId;
 	private long _userId;
 	private String _userUuid;
 	private long _courseId;

@@ -116,7 +116,7 @@ public class RegistrationLocalServiceClpInvoker {
 
 		_methodName48 = "addRegistration";
 
-		_methodParameterTypes48 = new String[] { "long", "long" };
+		_methodParameterTypes48 = new String[] { "long", "long", "long" };
 
 		_methodName49 = "getRegistrationsByCourseId";
 
@@ -273,7 +273,8 @@ public class RegistrationLocalServiceClpInvoker {
 		if (_methodName48.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes48, parameterTypes)) {
 			return RegistrationLocalServiceUtil.addRegistration(((Long)arguments[0]).longValue(),
-				((Long)arguments[1]).longValue());
+				((Long)arguments[1]).longValue(),
+				((Long)arguments[2]).longValue());
 		}
 
 		if (_methodName49.equals(name) &&

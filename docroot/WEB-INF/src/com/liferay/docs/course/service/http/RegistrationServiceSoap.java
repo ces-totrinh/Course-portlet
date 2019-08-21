@@ -63,12 +63,10 @@ import java.rmi.RemoteException;
  */
 public class RegistrationServiceSoap {
 	public static com.liferay.docs.course.model.RegistrationSoap addRegistration(
-		long courseId, long userId,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws RemoteException {
+		long groupId, long courseId, long userId) throws RemoteException {
 		try {
-			com.liferay.docs.course.model.Registration returnValue = RegistrationServiceUtil.addRegistration(courseId,
-					userId, serviceContext);
+			com.liferay.docs.course.model.Registration returnValue = RegistrationServiceUtil.addRegistration(groupId,
+					courseId, userId);
 
 			return com.liferay.docs.course.model.RegistrationSoap.toSoapModel(returnValue);
 		}
@@ -80,12 +78,9 @@ public class RegistrationServiceSoap {
 	}
 
 	public static com.liferay.docs.course.model.RegistrationSoap approveRegistration(
-		long registrationId,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws RemoteException {
+		long registrationId) throws RemoteException {
 		try {
-			com.liferay.docs.course.model.Registration returnValue = RegistrationServiceUtil.approveRegistration(registrationId,
-					serviceContext);
+			com.liferay.docs.course.model.Registration returnValue = RegistrationServiceUtil.approveRegistration(registrationId);
 
 			return com.liferay.docs.course.model.RegistrationSoap.toSoapModel(returnValue);
 		}
@@ -97,12 +92,9 @@ public class RegistrationServiceSoap {
 	}
 
 	public static com.liferay.docs.course.model.RegistrationSoap rejectRegistration(
-		long registrationId,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws RemoteException {
+		long registrationId) throws RemoteException {
 		try {
-			com.liferay.docs.course.model.Registration returnValue = RegistrationServiceUtil.rejectRegistration(registrationId,
-					serviceContext);
+			com.liferay.docs.course.model.Registration returnValue = RegistrationServiceUtil.rejectRegistration(registrationId);
 
 			return com.liferay.docs.course.model.RegistrationSoap.toSoapModel(returnValue);
 		}
@@ -114,12 +106,9 @@ public class RegistrationServiceSoap {
 	}
 
 	public static com.liferay.docs.course.model.RegistrationSoap deleteRegistration(
-		long registrationId,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws RemoteException {
+		long registrationId) throws RemoteException {
 		try {
-			com.liferay.docs.course.model.Registration returnValue = RegistrationServiceUtil.deleteRegistration(registrationId,
-					serviceContext);
+			com.liferay.docs.course.model.Registration returnValue = RegistrationServiceUtil.deleteRegistration(registrationId);
 
 			return com.liferay.docs.course.model.RegistrationSoap.toSoapModel(returnValue);
 		}

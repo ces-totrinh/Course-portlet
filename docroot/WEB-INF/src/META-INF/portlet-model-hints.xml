@@ -3,6 +3,7 @@
 <model-hints>
 	<model name="com.liferay.docs.course.model.Course">
 		<field name="courseId" type="long" />
+		<field name="groupId" type="long" />
 		<field name="name" type="String">
 			<hint name="max-length">75</hint>
 		</field>
@@ -17,6 +18,7 @@
 	</model>
 	<model name="com.liferay.docs.course.model.Registration">
 		<field name="registrationId" type="long" />
+		<field name="groupId" type="long" />
 		<field name="userId" type="long" />
 		<field name="courseId" type="long" />
 		<field name="status" type="int" />

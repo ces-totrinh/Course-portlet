@@ -35,14 +35,13 @@ public class CourseServiceClpInvoker {
 		_methodName32 = "updateCourse";
 
 		_methodParameterTypes32 = new String[] {
-				"long", "java.lang.String", "java.lang.String",
-				"java.lang.String", "int", "boolean",
-				"com.liferay.portal.service.ServiceContext"
+				"long", "long", "java.lang.String", "java.lang.String",
+				"java.lang.String", "int", "boolean"
 			};
 
 		_methodName33 = "updateStatusOfCourse";
 
-		_methodParameterTypes33 = new String[] { "long", "long", "boolean" };
+		_methodParameterTypes33 = new String[] { "long", "boolean" };
 
 		_methodName34 = "getCourse";
 
@@ -50,9 +49,7 @@ public class CourseServiceClpInvoker {
 
 		_methodName35 = "deleteCourse";
 
-		_methodParameterTypes35 = new String[] {
-				"long", "com.liferay.portal.service.ServiceContext"
-			};
+		_methodParameterTypes35 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -72,18 +69,17 @@ public class CourseServiceClpInvoker {
 		if (_methodName32.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes32, parameterTypes)) {
 			return CourseServiceUtil.updateCourse(((Long)arguments[0]).longValue(),
-				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
-				(java.lang.String)arguments[3],
-				((Integer)arguments[4]).intValue(),
-				((Boolean)arguments[5]).booleanValue(),
-				(com.liferay.portal.service.ServiceContext)arguments[6]);
+				((Long)arguments[1]).longValue(),
+				(java.lang.String)arguments[2], (java.lang.String)arguments[3],
+				(java.lang.String)arguments[4],
+				((Integer)arguments[5]).intValue(),
+				((Boolean)arguments[6]).booleanValue());
 		}
 
 		if (_methodName33.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes33, parameterTypes)) {
 			return CourseServiceUtil.updateStatusOfCourse(((Long)arguments[0]).longValue(),
-				((Long)arguments[1]).longValue(),
-				((Boolean)arguments[2]).booleanValue());
+				((Boolean)arguments[1]).booleanValue());
 		}
 
 		if (_methodName34.equals(name) &&
@@ -93,8 +89,7 @@ public class CourseServiceClpInvoker {
 
 		if (_methodName35.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes35, parameterTypes)) {
-			return CourseServiceUtil.deleteCourse(((Long)arguments[0]).longValue(),
-				(com.liferay.portal.service.ServiceContext)arguments[1]);
+			return CourseServiceUtil.deleteCourse(((Long)arguments[0]).longValue());
 		}
 
 		throw new UnsupportedOperationException();
