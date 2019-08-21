@@ -18,7 +18,7 @@ public class CourseRegistration extends MVCPortlet {
 	public void registerCourse(ActionRequest actionRequest, ActionResponse actionResponse) throws Exception {	
 		long courseId = ParamUtil.getLong(actionRequest, "courseId");
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(Registration.class.getName(), actionRequest);
-		RegistrationServiceUtil.addRegistration(courseId, serviceContext.getUserId(), serviceContext);
+		RegistrationServiceUtil.addRegistration(serviceContext.getScopeGroupId(), courseId, serviceContext.getUserId());
 		sendRedirect(actionRequest, actionResponse);
 	}
 }

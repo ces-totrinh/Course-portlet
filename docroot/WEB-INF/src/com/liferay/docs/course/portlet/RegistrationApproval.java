@@ -7,12 +7,9 @@ import javax.portlet.ActionResponse;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 
-import com.liferay.docs.course.model.Registration;
 import com.liferay.docs.course.service.RegistrationServiceUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
-import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.PortletURLFactoryUtil;
@@ -27,21 +24,15 @@ public class RegistrationApproval extends MVCPortlet {
 		long registrationId = ParamUtil.getLong(actionRequest, "registrationId");
 		long courseId = ParamUtil.getLong(actionRequest, "courseId");
 		
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-				Registration.class.getName(), actionRequest);
-		
-		RegistrationServiceUtil.approveRegistration(registrationId, serviceContext);
+		RegistrationServiceUtil.approveRegistration(registrationId);
 		_reloadViewsAfterChangeStatus(actionRequest, actionResponse, courseId, "/html/registrationapproval/registrationOfCourse.jsp");
 	}
 	
 	public void rejectRegistration(ActionRequest actionRequest, ActionResponse actionResponse) throws Exception {
 		long registrationId = ParamUtil.getLong(actionRequest, "registrationId");
 		long courseId = ParamUtil.getLong(actionRequest, "courseId");
-		
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-				Registration.class.getName(), actionRequest);
-		
-		RegistrationServiceUtil.rejectRegistration(registrationId, serviceContext);
+
+		RegistrationServiceUtil.rejectRegistration(registrationId);
 		_reloadViewsAfterChangeStatus(actionRequest, actionResponse, courseId, "/html/registrationapproval/registrationOfCourse.jsp");
 	}
 	

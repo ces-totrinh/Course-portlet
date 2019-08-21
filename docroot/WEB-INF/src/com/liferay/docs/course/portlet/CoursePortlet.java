@@ -30,9 +30,7 @@ public class CoursePortlet extends MVCPortlet {
 	
 	public void deleteCourse(ActionRequest actionRequest, ActionResponse actionResponse) throws Exception {
 		long courseId = ParamUtil.getLong(actionRequest, "courseId");
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-				Course.class.getName(), actionRequest);
-		CourseServiceUtil.deleteCourse(courseId, serviceContext);
+		CourseServiceUtil.deleteCourse(courseId);
 		sendRedirect(actionRequest, actionResponse);
 	}
 	
@@ -43,10 +41,9 @@ public class CoursePortlet extends MVCPortlet {
 		String lecturer = ParamUtil.getString(actionRequest, "lecturer");
 		int duration = ParamUtil.getInteger(actionRequest, "duration");
 		boolean status = ParamUtil.getBoolean(actionRequest, "status");
-		
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 				Course.class.getName(), actionRequest);
 		
-		return CourseServiceUtil.updateCourse(courseId, name, description, lecturer, duration, status, serviceContext);
+		return CourseServiceUtil.updateCourse(serviceContext.getScopeGroupId(), courseId, name, description, lecturer, duration, status);
 	}
 }
