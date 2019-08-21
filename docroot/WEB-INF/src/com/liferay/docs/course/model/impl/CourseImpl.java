@@ -14,8 +14,6 @@
 
 package com.liferay.docs.course.model.impl;
 
-import com.liferay.portal.service.GroupLocalServiceUtil;
-
 /**
  * The extended model implementation for the Course service. Represents a row in the &quot;course_tbl&quot; database table, with each column mapped to a property of this class.
  *
@@ -32,13 +30,5 @@ public class CourseImpl extends CourseBaseImpl {
 	 * Never reference this class directly. All methods that expect a course model instance should use the {@link com.liferay.docs.course.model.Course} interface instead.
 	 */
 	public CourseImpl() {
-	}
-	public long getCompanyId(){
-		long companyId = 0;
-		try {
-			companyId = GroupLocalServiceUtil.getGroup(getGroupId()).getCompanyId();
-		} catch (Exception e) {
-		}
-		return companyId;
 	}
 }
