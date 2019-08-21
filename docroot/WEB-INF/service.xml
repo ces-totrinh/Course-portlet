@@ -10,6 +10,9 @@
 		<!-- PK fields -->
 		<column name="courseId" type="long" primary="true" db-name="course_id" />
 
+		<!-- Audit fields -->
+		<column name="groupId" type="long" />
+		
 		<!-- Other fields -->
 
 		<column name="name" type="String" db-name="course_name" />
@@ -34,9 +37,11 @@
 
 		<!-- PK fields -->
 		<column name="registrationId" type="long" primary="true" db-name="registration_id" />
+		
+		<!-- Audit fields -->
+		<column name="groupId" type="long" />
 
 		<!-- Other fields -->
-
 		<column name="userId" type="long" db-name="user_id" />
 		<column name="courseId" type="long" db-name="course_id" />
 		<column name="status" type="int" db-name="registration_status" />
