@@ -41,7 +41,7 @@ public class RegistrationLocalServiceImpl extends RegistrationLocalServiceBaseIm
 	 *
 	 * Never reference this interface directly. Always use {@link com.liferay.docs.course.service.RegistrationLocalServiceUtil} to access the registration local service.
 	 */
-	public Registration addRegistration(long courseId, long userId) throws PortalException, SystemException {		
+	public Registration addRegistration(long groupId, long courseId, long userId) throws PortalException, SystemException {		
 		
 		int countRegistrationExisted = countRegistrationByCourseIdAndUserId(courseId, userId);
 		
@@ -51,6 +51,7 @@ public class RegistrationLocalServiceImpl extends RegistrationLocalServiceBaseIm
 		
 		Registration registration = registrationPersistence.create(registrationId);
 		
+		registration.setGroupId(groupId);
 		registration.setCourseId(courseId);
 		registration.setUserId(userId);
 		registration.setStatus(WAITING_APPROVAL);
