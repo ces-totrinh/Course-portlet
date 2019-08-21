@@ -63,23 +63,22 @@ public class CourseServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
-	public static com.liferay.docs.course.model.Course addCourse(
-		java.lang.String name, java.lang.String description,
-		java.lang.String lecturer, int duration, boolean status)
+	public static com.liferay.docs.course.model.Course updateCourse(
+		long groupId, long courseId, java.lang.String name,
+		java.lang.String description, java.lang.String lecturer, int duration,
+		boolean status)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .addCourse(name, description, lecturer, duration, status);
+				   .updateCourse(groupId, courseId, name, description,
+			lecturer, duration, status);
 	}
 
-	public static com.liferay.docs.course.model.Course updateCourse(
-		long courseId, java.lang.String name, java.lang.String description,
-		java.lang.String lecturer, int duration, boolean status)
+	public static com.liferay.docs.course.model.Course updateStatusOfCourse(
+		long courseId, boolean status)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .updateCourse(courseId, name, description, lecturer,
-			duration, status);
+		return getService().updateStatusOfCourse(courseId, status);
 	}
 
 	public static com.liferay.docs.course.model.Course getCourse(long courseId)
@@ -89,19 +88,8 @@ public class CourseServiceUtil {
 	}
 
 	public static com.liferay.docs.course.model.Course deleteCourse(
-		long courseId)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		long courseId) throws java.lang.Exception {
 		return getService().deleteCourse(courseId);
-	}
-
-	public static com.liferay.docs.course.model.Course _updateCourse(
-		long courseId, java.lang.String name, java.lang.String description,
-		java.lang.String lecturer, int duration, boolean status)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   ._updateCourse(courseId, name, description, lecturer,
-			duration, status);
 	}
 
 	public static void clearService() {

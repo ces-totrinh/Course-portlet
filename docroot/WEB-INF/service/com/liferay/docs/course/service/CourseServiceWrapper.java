@@ -57,23 +57,21 @@ public class CourseServiceWrapper implements CourseService,
 	}
 
 	@Override
-	public com.liferay.docs.course.model.Course addCourse(
-		java.lang.String name, java.lang.String description,
+	public com.liferay.docs.course.model.Course updateCourse(long groupId,
+		long courseId, java.lang.String name, java.lang.String description,
 		java.lang.String lecturer, int duration, boolean status)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _courseService.addCourse(name, description, lecturer, duration,
-			status);
+		return _courseService.updateCourse(groupId, courseId, name,
+			description, lecturer, duration, status);
 	}
 
 	@Override
-	public com.liferay.docs.course.model.Course updateCourse(long courseId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String lecturer, int duration, boolean status)
+	public com.liferay.docs.course.model.Course updateStatusOfCourse(
+		long courseId, boolean status)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _courseService.updateCourse(courseId, name, description,
-			lecturer, duration, status);
+		return _courseService.updateStatusOfCourse(courseId, status);
 	}
 
 	@Override
@@ -85,18 +83,8 @@ public class CourseServiceWrapper implements CourseService,
 
 	@Override
 	public com.liferay.docs.course.model.Course deleteCourse(long courseId)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws java.lang.Exception {
 		return _courseService.deleteCourse(courseId);
-	}
-
-	@Override
-	public com.liferay.docs.course.model.Course _updateCourse(long courseId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String lecturer, int duration, boolean status)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _courseService._updateCourse(courseId, name, description,
-			lecturer, duration, status);
 	}
 
 	/**

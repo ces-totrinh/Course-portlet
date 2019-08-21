@@ -70,11 +70,13 @@ public class CourseLocalServiceUtil {
 	* @return the course that was removed
 	* @throws PortalException if a course with the primary key could not be found
 	* @throws SystemException if a system exception occurred
+	* @throws java.lang.Exception
 	*/
 	public static com.liferay.docs.course.model.Course deleteCourse(
 		long courseId)
 		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+			com.liferay.portal.kernel.exception.SystemException,
+			java.lang.Exception {
 		return getService().deleteCourse(courseId);
 	}
 
@@ -274,13 +276,14 @@ public class CourseLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
-	public static com.liferay.docs.course.model.Course addCourse(
+	public static com.liferay.docs.course.model.Course addCourse(long groupId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String lecturer, int duration, boolean status)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .addCourse(name, description, lecturer, duration, status);
+				   .addCourse(groupId, name, description, lecturer, duration,
+			status);
 	}
 
 	public static com.liferay.docs.course.model.Course updateCourse(
@@ -291,6 +294,36 @@ public class CourseLocalServiceUtil {
 		return getService()
 				   .updateCourse(courseId, name, description, lecturer,
 			duration, status);
+	}
+
+	public static com.liferay.docs.course.model.Course updateStatusOfCourse(
+		long courseId, boolean status)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().updateStatusOfCourse(courseId, status);
+	}
+
+	public static java.util.List<java.lang.Object> getCoursesWithTotalRegistration()
+		throws java.lang.Exception {
+		return getService().getCoursesWithTotalRegistration();
+	}
+
+	public static java.util.List<com.liferay.docs.course.model.Course> getCoursesByStatus(
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getCoursesByStatus(start, end);
+	}
+
+	public static int countCoursesByStatus()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().countCoursesByStatus();
+	}
+
+	public static com.liferay.docs.course.model.Course getCourseById(
+		long courseId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getCourseById(courseId);
 	}
 
 	public static void clearService() {

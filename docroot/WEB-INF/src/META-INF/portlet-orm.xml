@@ -12,6 +12,7 @@
 			<id name="courseId">
 				<column name="COURSE_ID" />
 			</id>
+			<basic name="groupId" />
 			<basic name="name">
 				<column name="COURSE_NAME" />
 			</basic>
@@ -32,8 +33,33 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.liferay.docs.course.model.impl.RegistrationModelImpl">
+		<attributes>
+			<id name="registrationId">
+				<column name="REGISTRATION_ID" />
+			</id>
+			<basic name="groupId" />
+			<basic name="userId">
+				<column name="USER_ID" />
+			</basic>
+			<basic name="courseId">
+				<column name="COURSE_ID" />
+			</basic>
+			<basic name="status">
+				<column name="REGISTRATION_STATUS" />
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
 	<entity class="com.liferay.docs.course.model.impl.CourseImpl" name="Course">
 		<table name="course_tbl" />
+		<attributes />
+	</entity>
+	<entity class="com.liferay.docs.course.model.impl.RegistrationImpl" name="Registration">
+		<table name="registration_tbl" />
 		<attributes />
 	</entity>
 </entity-mappings>

@@ -17,6 +17,8 @@ package com.liferay.docs.course.service.messaging;
 import com.liferay.docs.course.service.ClpSerializer;
 import com.liferay.docs.course.service.CourseLocalServiceUtil;
 import com.liferay.docs.course.service.CourseServiceUtil;
+import com.liferay.docs.course.service.RegistrationLocalServiceUtil;
+import com.liferay.docs.course.service.RegistrationServiceUtil;
 
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
@@ -39,6 +41,9 @@ public class ClpMessageListener extends BaseMessageListener {
 			CourseLocalServiceUtil.clearService();
 
 			CourseServiceUtil.clearService();
+			RegistrationLocalServiceUtil.clearService();
+
+			RegistrationServiceUtil.clearService();
 		}
 	}
 }

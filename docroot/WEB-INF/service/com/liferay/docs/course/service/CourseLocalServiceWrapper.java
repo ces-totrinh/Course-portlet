@@ -61,11 +61,13 @@ public class CourseLocalServiceWrapper implements CourseLocalService,
 	* @return the course that was removed
 	* @throws PortalException if a course with the primary key could not be found
 	* @throws SystemException if a system exception occurred
+	* @throws java.lang.Exception
 	*/
 	@Override
 	public com.liferay.docs.course.model.Course deleteCourse(long courseId)
 		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+			com.liferay.portal.kernel.exception.SystemException,
+			java.lang.Exception {
 		return _courseLocalService.deleteCourse(courseId);
 	}
 
@@ -281,13 +283,13 @@ public class CourseLocalServiceWrapper implements CourseLocalService,
 	}
 
 	@Override
-	public com.liferay.docs.course.model.Course addCourse(
+	public com.liferay.docs.course.model.Course addCourse(long groupId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String lecturer, int duration, boolean status)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _courseLocalService.addCourse(name, description, lecturer,
-			duration, status);
+		return _courseLocalService.addCourse(groupId, name, description,
+			lecturer, duration, status);
 	}
 
 	@Override
@@ -298,6 +300,40 @@ public class CourseLocalServiceWrapper implements CourseLocalService,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _courseLocalService.updateCourse(courseId, name, description,
 			lecturer, duration, status);
+	}
+
+	@Override
+	public com.liferay.docs.course.model.Course updateStatusOfCourse(
+		long courseId, boolean status)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _courseLocalService.updateStatusOfCourse(courseId, status);
+	}
+
+	@Override
+	public java.util.List<java.lang.Object> getCoursesWithTotalRegistration()
+		throws java.lang.Exception {
+		return _courseLocalService.getCoursesWithTotalRegistration();
+	}
+
+	@Override
+	public java.util.List<com.liferay.docs.course.model.Course> getCoursesByStatus(
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _courseLocalService.getCoursesByStatus(start, end);
+	}
+
+	@Override
+	public int countCoursesByStatus()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _courseLocalService.countCoursesByStatus();
+	}
+
+	@Override
+	public com.liferay.docs.course.model.Course getCourseById(long courseId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _courseLocalService.getCourseById(courseId);
 	}
 
 	/**

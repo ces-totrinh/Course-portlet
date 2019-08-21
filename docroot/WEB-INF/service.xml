@@ -10,6 +10,9 @@
 		<!-- PK fields -->
 		<column name="courseId" type="long" primary="true" db-name="course_id" />
 
+		<!-- Audit fields -->
+		<column name="groupId" type="long" />
+		
 		<!-- Other fields -->
 
 		<column name="name" type="String" db-name="course_name" />
@@ -18,10 +21,50 @@
 		<column name="lecturer" type="String" db-name="course_lecturer" />
 		<column name="duration" type="int" db-name="course_duration" />
 		<column name="status" type="boolean" db-name="course_status" />
+		
 		<!-- Order -->
-
 		<order by="asc">
-			<order-column name="name" />
+			<order-column name="status" />
 		</order>
+		
+		<!-- Finder -->
+		<finder return-type="Collection" name="Status">
+			<finder-column name="status"></finder-column>
+		</finder>	
+	</entity>
+	<entity name="Registration" local-service="true" remote-service="true"
+		table="registration_tbl">
+
+		<!-- PK fields -->
+		<column name="registrationId" type="long" primary="true" db-name="registration_id" />
+		
+		<!-- Audit fields -->
+		<column name="groupId" type="long" />
+
+		<!-- Other fields -->
+		<column name="userId" type="long" db-name="user_id" />
+		<column name="courseId" type="long" db-name="course_id" />
+		<column name="status" type="int" db-name="registration_status" />
+		
+		<!-- Order -->
+		<order by="desc">
+			<order-column name="status" />
+		</order>
+		
+		<!-- Finder -->
+		<finder return-type="Collection" name="CourseId">
+			<finder-column name="courseId"></finder-column>
+		</finder>	
+		<finder return-type="Collection" name="UserId">
+			<finder-column name="userId"></finder-column>
+		</finder>	
+		<finder return-type="Collection" name="CourseIdAndStatus">
+			<finder-column name="courseId"></finder-column>
+			<finder-column name="status"></finder-column>
+		</finder>	
+		<finder return-type="Collection" name="CourseIdAndUserId">
+		<finder-column name="courseId"></finder-column>
+			<finder-column name="userId"></finder-column>
+		</finder>	
 	</entity>
 </service-builder>

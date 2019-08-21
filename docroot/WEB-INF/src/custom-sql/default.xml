@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom-sql>
+	<sql id="com.liferay.docs.course.service.persistence.CourseFinder.getCoursesWithTotalRegistration">
+		<![CDATA[
+			SELECT c.course_id AS course_id,
+			c.course_name AS course_name, 
+			c.course_lecturer AS course_lecturer, 
+			COUNT(r.registration_id) AS total_registration 
+			FROM course_tbl c 
+			INNER JOIN registration_tbl r ON c.course_id =r.course_id 
+			GROUP BY c.course_id, c.course_name, c.course_lecturer;
+		]]>
+	</sql>
+</custom-sql>

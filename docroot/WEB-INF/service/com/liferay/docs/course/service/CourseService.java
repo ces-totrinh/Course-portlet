@@ -65,15 +65,14 @@ public interface CourseService extends BaseService, InvokableService {
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
 
-	public com.liferay.docs.course.model.Course addCourse(
-		java.lang.String name, java.lang.String description,
+	public com.liferay.docs.course.model.Course updateCourse(long groupId,
+		long courseId, java.lang.String name, java.lang.String description,
 		java.lang.String lecturer, int duration, boolean status)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.docs.course.model.Course updateCourse(long courseId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String lecturer, int duration, boolean status)
+	public com.liferay.docs.course.model.Course updateStatusOfCourse(
+		long courseId, boolean status)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -83,11 +82,5 @@ public interface CourseService extends BaseService, InvokableService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.docs.course.model.Course deleteCourse(long courseId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public com.liferay.docs.course.model.Course _updateCourse(long courseId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String lecturer, int duration, boolean status)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
+		throws java.lang.Exception;
 }

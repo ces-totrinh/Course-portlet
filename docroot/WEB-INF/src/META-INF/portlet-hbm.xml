@@ -3,15 +3,27 @@
 
 <hibernate-mapping default-lazy="false" auto-import="false">
 	<import class="com.liferay.docs.course.model.Course" />
+	<import class="com.liferay.docs.course.model.Registration" />
 	<class name="com.liferay.docs.course.model.impl.CourseImpl" table="course_tbl">
 		<cache usage="read-write" />
 		<id name="courseId" column="course_id" type="long">
 			<generator class="assigned" />
 		</id>
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" column="course_name" />
 		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" column="course_description" />
 		<property name="lecturer" type="com.liferay.portal.dao.orm.hibernate.StringType" column="course_lecturer" />
 		<property name="duration" type="com.liferay.portal.dao.orm.hibernate.IntegerType" column="course_duration" />
 		<property name="status" type="com.liferay.portal.dao.orm.hibernate.BooleanType" column="course_status" />
+	</class>
+	<class name="com.liferay.docs.course.model.impl.RegistrationImpl" table="registration_tbl">
+		<cache usage="read-write" />
+		<id name="registrationId" column="registration_id" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" column="user_id" />
+		<property name="courseId" type="com.liferay.portal.dao.orm.hibernate.LongType" column="course_id" />
+		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" column="registration_status" />
 	</class>
 </hibernate-mapping>

@@ -73,6 +73,7 @@ public class CourseClp extends BaseModelImpl<Course> implements Course {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("courseId", getCourseId());
+		attributes.put("groupId", getGroupId());
 		attributes.put("name", getName());
 		attributes.put("description", getDescription());
 		attributes.put("lecturer", getLecturer());
@@ -88,6 +89,12 @@ public class CourseClp extends BaseModelImpl<Course> implements Course {
 
 		if (courseId != null) {
 			setCourseId(courseId);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
 		}
 
 		String name = (String)attributes.get("name");
@@ -137,6 +144,29 @@ public class CourseClp extends BaseModelImpl<Course> implements Course {
 				Method method = clazz.getMethod("setCourseId", long.class);
 
 				method.invoke(_courseRemoteModel, courseId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	@Override
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+
+		if (_courseRemoteModel != null) {
+			try {
+				Class<?> clazz = _courseRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setGroupId", long.class);
+
+				method.invoke(_courseRemoteModel, groupId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -264,6 +294,25 @@ public class CourseClp extends BaseModelImpl<Course> implements Course {
 		}
 	}
 
+	@Override
+	public long getCompanyId() {
+		try {
+			String methodName = "getCompanyId";
+
+			Class<?>[] parameterTypes = new Class<?>[] {  };
+
+			Object[] parameterValues = new Object[] {  };
+
+			Long returnObj = (Long)invokeOnRemoteModel(methodName,
+					parameterTypes, parameterValues);
+
+			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
 	public BaseModel<?> getCourseRemoteModel() {
 		return _courseRemoteModel;
 	}
@@ -334,6 +383,7 @@ public class CourseClp extends BaseModelImpl<Course> implements Course {
 		CourseClp clone = new CourseClp();
 
 		clone.setCourseId(getCourseId());
+		clone.setGroupId(getGroupId());
 		clone.setName(getName());
 		clone.setDescription(getDescription());
 		clone.setLecturer(getLecturer());
@@ -347,7 +397,15 @@ public class CourseClp extends BaseModelImpl<Course> implements Course {
 	public int compareTo(Course course) {
 		int value = 0;
 
-		value = getName().compareTo(course.getName());
+		if (getStatus() == course.getStatus()) {
+			value = -1;
+		}
+		else if (getStatus() != course.getStatus()) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
 
 		if (value != 0) {
 			return value;
@@ -389,10 +447,12 @@ public class CourseClp extends BaseModelImpl<Course> implements Course {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(15);
 
 		sb.append("{courseId=");
 		sb.append(getCourseId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
 		sb.append(", name=");
 		sb.append(getName());
 		sb.append(", description=");
@@ -410,7 +470,7 @@ public class CourseClp extends BaseModelImpl<Course> implements Course {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(22);
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.docs.course.model.Course");
@@ -419,6 +479,10 @@ public class CourseClp extends BaseModelImpl<Course> implements Course {
 		sb.append(
 			"<column><column-name>courseId</column-name><column-value><![CDATA[");
 		sb.append(getCourseId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>name</column-name><column-value><![CDATA[");
@@ -447,6 +511,7 @@ public class CourseClp extends BaseModelImpl<Course> implements Course {
 	}
 
 	private long _courseId;
+	private long _groupId;
 	private String _name;
 	private String _description;
 	private String _lecturer;

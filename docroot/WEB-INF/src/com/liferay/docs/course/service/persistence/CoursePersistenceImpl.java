@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
+import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -36,6 +37,7 @@ import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnmodifiableList;
 import com.liferay.portal.model.CacheModel;
@@ -82,6 +84,491 @@ public class CoursePersistenceImpl extends BasePersistenceImpl<Course>
 	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(CourseModelImpl.ENTITY_CACHE_ENABLED,
 			CourseModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_STATUS = new FinderPath(CourseModelImpl.ENTITY_CACHE_ENABLED,
+			CourseModelImpl.FINDER_CACHE_ENABLED, CourseImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByStatus",
+			new String[] {
+				Boolean.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_STATUS =
+		new FinderPath(CourseModelImpl.ENTITY_CACHE_ENABLED,
+			CourseModelImpl.FINDER_CACHE_ENABLED, CourseImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByStatus",
+			new String[] { Boolean.class.getName() },
+			CourseModelImpl.STATUS_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_STATUS = new FinderPath(CourseModelImpl.ENTITY_CACHE_ENABLED,
+			CourseModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByStatus",
+			new String[] { Boolean.class.getName() });
+
+	/**
+	 * Returns all the courses where status = &#63;.
+	 *
+	 * @param status the status
+	 * @return the matching courses
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Course> findByStatus(boolean status) throws SystemException {
+		return findByStatus(status, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the courses where status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.docs.course.model.impl.CourseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param status the status
+	 * @param start the lower bound of the range of courses
+	 * @param end the upper bound of the range of courses (not inclusive)
+	 * @return the range of matching courses
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Course> findByStatus(boolean status, int start, int end)
+		throws SystemException {
+		return findByStatus(status, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the courses where status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.docs.course.model.impl.CourseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param status the status
+	 * @param start the lower bound of the range of courses
+	 * @param end the upper bound of the range of courses (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching courses
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Course> findByStatus(boolean status, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_STATUS;
+			finderArgs = new Object[] { status };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_STATUS;
+			finderArgs = new Object[] { status, start, end, orderByComparator };
+		}
+
+		List<Course> list = (List<Course>)FinderCacheUtil.getResult(finderPath,
+				finderArgs, this);
+
+		if ((list != null) && !list.isEmpty()) {
+			for (Course course : list) {
+				if ((status != course.getStatus())) {
+					list = null;
+
+					break;
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_COURSE_WHERE);
+
+			query.append(_FINDER_COLUMN_STATUS_STATUS_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(CourseModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(status);
+
+				if (!pagination) {
+					list = (List<Course>)QueryUtil.list(q, getDialect(), start,
+							end, false);
+
+					Collections.sort(list);
+
+					list = new UnmodifiableList<Course>(list);
+				}
+				else {
+					list = (List<Course>)QueryUtil.list(q, getDialect(), start,
+							end);
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first course in the ordered set where status = &#63;.
+	 *
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching course
+	 * @throws com.liferay.docs.course.NoSuchCourseException if a matching course could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Course findByStatus_First(boolean status,
+		OrderByComparator orderByComparator)
+		throws NoSuchCourseException, SystemException {
+		Course course = fetchByStatus_First(status, orderByComparator);
+
+		if (course != null) {
+			return course;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("status=");
+		msg.append(status);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchCourseException(msg.toString());
+	}
+
+	/**
+	 * Returns the first course in the ordered set where status = &#63;.
+	 *
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching course, or <code>null</code> if a matching course could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Course fetchByStatus_First(boolean status,
+		OrderByComparator orderByComparator) throws SystemException {
+		List<Course> list = findByStatus(status, 0, 1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last course in the ordered set where status = &#63;.
+	 *
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching course
+	 * @throws com.liferay.docs.course.NoSuchCourseException if a matching course could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Course findByStatus_Last(boolean status,
+		OrderByComparator orderByComparator)
+		throws NoSuchCourseException, SystemException {
+		Course course = fetchByStatus_Last(status, orderByComparator);
+
+		if (course != null) {
+			return course;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("status=");
+		msg.append(status);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchCourseException(msg.toString());
+	}
+
+	/**
+	 * Returns the last course in the ordered set where status = &#63;.
+	 *
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching course, or <code>null</code> if a matching course could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Course fetchByStatus_Last(boolean status,
+		OrderByComparator orderByComparator) throws SystemException {
+		int count = countByStatus(status);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<Course> list = findByStatus(status, count - 1, count,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the courses before and after the current course in the ordered set where status = &#63;.
+	 *
+	 * @param courseId the primary key of the current course
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next course
+	 * @throws com.liferay.docs.course.NoSuchCourseException if a course with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Course[] findByStatus_PrevAndNext(long courseId, boolean status,
+		OrderByComparator orderByComparator)
+		throws NoSuchCourseException, SystemException {
+		Course course = findByPrimaryKey(courseId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			Course[] array = new CourseImpl[3];
+
+			array[0] = getByStatus_PrevAndNext(session, course, status,
+					orderByComparator, true);
+
+			array[1] = course;
+
+			array[2] = getByStatus_PrevAndNext(session, course, status,
+					orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected Course getByStatus_PrevAndNext(Session session, Course course,
+		boolean status, OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_COURSE_WHERE);
+
+		query.append(_FINDER_COLUMN_STATUS_STATUS_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(CourseModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(status);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(course);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<Course> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the courses where status = &#63; from the database.
+	 *
+	 * @param status the status
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void removeByStatus(boolean status) throws SystemException {
+		for (Course course : findByStatus(status, QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS, null)) {
+			remove(course);
+		}
+	}
+
+	/**
+	 * Returns the number of courses where status = &#63;.
+	 *
+	 * @param status the status
+	 * @return the number of matching courses
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int countByStatus(boolean status) throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_STATUS;
+
+		Object[] finderArgs = new Object[] { status };
+
+		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
+				this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_COURSE_WHERE);
+
+			query.append(_FINDER_COLUMN_STATUS_STATUS_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(status);
+
+				count = (Long)q.uniqueResult();
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_STATUS_STATUS_2 = "course.status = ?";
 
 	public CoursePersistenceImpl() {
 		setModelClass(Course.class);
@@ -275,6 +762,8 @@ public class CoursePersistenceImpl extends BasePersistenceImpl<Course>
 
 		boolean isNew = course.isNew();
 
+		CourseModelImpl courseModelImpl = (CourseModelImpl)course;
+
 		Session session = null;
 
 		try {
@@ -298,8 +787,25 @@ public class CoursePersistenceImpl extends BasePersistenceImpl<Course>
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 
-		if (isNew) {
+		if (isNew || !CourseModelImpl.COLUMN_BITMASK_ENABLED) {
 			FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+		}
+
+		else {
+			if ((courseModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_STATUS.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] { courseModelImpl.getOriginalStatus() };
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_STATUS, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_STATUS,
+					args);
+
+				args = new Object[] { courseModelImpl.getStatus() };
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_STATUS, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_STATUS,
+					args);
+			}
 		}
 
 		EntityCacheUtil.putResult(CourseModelImpl.ENTITY_CACHE_ENABLED,
@@ -319,6 +825,7 @@ public class CoursePersistenceImpl extends BasePersistenceImpl<Course>
 		courseImpl.setPrimaryKey(course.getPrimaryKey());
 
 		courseImpl.setCourseId(course.getCourseId());
+		courseImpl.setGroupId(course.getGroupId());
 		courseImpl.setName(course.getName());
 		courseImpl.setDescription(course.getDescription());
 		courseImpl.setLecturer(course.getLecturer());
@@ -636,9 +1143,12 @@ public class CoursePersistenceImpl extends BasePersistenceImpl<Course>
 	}
 
 	private static final String _SQL_SELECT_COURSE = "SELECT course FROM Course course";
+	private static final String _SQL_SELECT_COURSE_WHERE = "SELECT course FROM Course course WHERE ";
 	private static final String _SQL_COUNT_COURSE = "SELECT COUNT(course) FROM Course course";
+	private static final String _SQL_COUNT_COURSE_WHERE = "SELECT COUNT(course) FROM Course course WHERE ";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "course.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Course exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No Course exists with the key {";
 	private static final boolean _HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE = GetterUtil.getBoolean(PropsUtil.get(
 				PropsKeys.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE));
 	private static Log _log = LogFactoryUtil.getLog(CoursePersistenceImpl.class);

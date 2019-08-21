@@ -1,11 +1,11 @@
-<%@ include file="/html/course/init.jsp"%>
+<%@ include file="/html/init.jsp"%>
 
 <%
 	ResultRow row =(ResultRow) request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 	Course course =(Course) row.getObject();
 %>
 
-<liferay-ui:icon-menu>
+<liferay-ui:icon-menu direction="right">
 	<portlet:renderURL var="editURL">
 		<portlet:param name="courseId" value="<%=String.valueOf(course.getCourseId())%>"/>
 		<portlet:param name="mvcPath" value="/html/course/editForm.jsp"/>
