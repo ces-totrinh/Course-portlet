@@ -21,7 +21,6 @@ import com.liferay.docs.course.service.permission.CoursePermission;
 import com.liferay.docs.course.util.ActionKeys;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.service.ServiceContext;
 
 /**
  * The implementation of the course remote service.
@@ -44,27 +43,27 @@ public class CourseServiceImpl extends CourseServiceBaseImpl {
 	 * Never reference this interface directly. Always use {@link com.liferay.docs.course.service.CourseServiceUtil} to access the course remote service.
 	 */
 	
-	public Course updateCourse(long courseId, String name, String description, String lecturer, int duration, boolean status, ServiceContext serviceContext) throws PortalException, SystemException {
+	public Course updateCourse(long groupId, long courseId, String name, String description, String lecturer, int duration, boolean status) throws PortalException, SystemException {
 		if(courseId <= 0) {
-			ModelPermission.check(getPermissionChecker(), serviceContext.getScopeGroupId(), ActionKeys.ADD_COURSE);
-			return courseLocalService.addCourse(name, description, lecturer, duration, status);
+			ModelPermission.check(getPermissionChecker(), groupId, ActionKeys.ADD_COURSE);
+			return courseLocalService.addCourse(groupId, name, description, lecturer, duration, status);
 		}
 		else {
-			CoursePermission.check(getPermissionChecker(), serviceContext.getScopeGroupId(), courseId, ActionKeys.UPDATE_COURSE);
+			CoursePermission.check(getPermissionChecker(), courseId, ActionKeys.UPDATE_COURSE);
 			return courseLocalService.updateCourse(courseId, name, description, lecturer, duration, status);
 		}
 	}
 	
-	public Course updateStatusOfCourse(long groupId, long courseId, boolean status) throws PortalException, SystemException {
-		CoursePermission.check(getPermissionChecker(), groupId, courseId, ActionKeys.UPDATE_COURSE);
+	public Course updateStatusOfCourse(long courseId, boolean status) throws PortalException, SystemException {
+		CoursePermission.check(getPermissionChecker(), courseId, ActionKeys.UPDATE_COURSE);
 		return courseLocalService.updateStatusOfCourse(courseId, status);
 	}
 	public Course getCourse(long courseId) throws PortalException, SystemException {
 		return courseLocalService.getCourse(courseId);
 	}
 	
-	public Course deleteCourse(long courseId, ServiceContext serviceContext) throws Exception {
-		CoursePermission.check(getPermissionChecker(), serviceContext.getScopeGroupId(), courseId, ActionKeys.DELETE_COURSE);
+	public Course deleteCourse(long courseId) throws Exception {
+		CoursePermission.check(getPermissionChecker(),  courseId, ActionKeys.DELETE_COURSE);
 		return courseLocalService.deleteCourse(courseId);
 	}
 
