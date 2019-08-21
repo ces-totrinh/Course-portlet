@@ -21,7 +21,6 @@ import com.liferay.docs.course.service.permission.RegistrationPermission;
 import com.liferay.docs.course.util.ActionKeys;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.service.ServiceContext;
 
 /**
  * The implementation of the registration remote service.
@@ -43,22 +42,22 @@ public class RegistrationServiceImpl extends RegistrationServiceBaseImpl {
 	 *
 	 * Never reference this interface directly. Always use {@link com.liferay.docs.course.service.RegistrationServiceUtil} to access the registration remote service.
 	 */
-	public Registration addRegistration(long courseId, long userId, ServiceContext serviceContext) throws PortalException, SystemException {
-		ModelPermission.check(getPermissionChecker(), serviceContext.getScopeGroupId(), ActionKeys.ADD_REGISTRATION);
-		return registrationLocalService.addRegistration(courseId, userId);
+	public Registration addRegistration(long groupId, long courseId, long userId) throws PortalException, SystemException {
+		ModelPermission.check(getPermissionChecker(), groupId, ActionKeys.ADD_REGISTRATION);
+		return registrationLocalService.addRegistration(groupId, courseId, userId);
 	}
-	public Registration approveRegistration(long registrationId, ServiceContext serviceContext) throws PortalException, SystemException {
-		RegistrationPermission.check(getPermissionChecker(), serviceContext.getScopeGroupId(), registrationId, ActionKeys.UPDATE_REGISTRATION);
+	public Registration approveRegistration(long registrationId) throws PortalException, SystemException {
+		RegistrationPermission.check(getPermissionChecker(), registrationId, ActionKeys.UPDATE_REGISTRATION);
 		return registrationLocalService.approveRegistration(registrationId);
 	}
 	
-	public Registration rejectRegistration(long registrationId, ServiceContext serviceContext) throws PortalException, SystemException {
-		RegistrationPermission.check(getPermissionChecker(), serviceContext.getScopeGroupId(), registrationId, ActionKeys.UPDATE_REGISTRATION);
+	public Registration rejectRegistration(long registrationId) throws PortalException, SystemException {
+		RegistrationPermission.check(getPermissionChecker(), registrationId, ActionKeys.UPDATE_REGISTRATION);
 		return registrationLocalService.rejectRegistration(registrationId);
 	}
 	
-	public Registration deleteRegistration(long registrationId, ServiceContext serviceContext) throws Exception {
-		RegistrationPermission.check(getPermissionChecker(), serviceContext.getScopeGroupId(), registrationId, ActionKeys.DELETE_REGISTRATION);
+	public Registration deleteRegistration(long registrationId) throws Exception {
+		RegistrationPermission.check(getPermissionChecker(), registrationId, ActionKeys.DELETE_REGISTRATION);
 		return registrationLocalService.deleteRegistration(registrationId);
 	}
 }
