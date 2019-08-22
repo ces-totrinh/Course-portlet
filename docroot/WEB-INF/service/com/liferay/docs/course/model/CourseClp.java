@@ -294,25 +294,6 @@ public class CourseClp extends BaseModelImpl<Course> implements Course {
 		}
 	}
 
-	@Override
-	public long getCompanyId() {
-		try {
-			String methodName = "getCompanyId";
-
-			Class<?>[] parameterTypes = new Class<?>[] {  };
-
-			Object[] parameterValues = new Object[] {  };
-
-			Long returnObj = (Long)invokeOnRemoteModel(methodName,
-					parameterTypes, parameterValues);
-
-			return returnObj;
-		}
-		catch (Exception e) {
-			throw new UnsupportedOperationException(e);
-		}
-	}
-
 	public BaseModel<?> getCourseRemoteModel() {
 		return _courseRemoteModel;
 	}

@@ -27,6 +27,9 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 
 public class CourseIndexer extends BaseIndexer {
 
+	public static final String[] CLASS_NAME = { Course.class.getName() };
+	public static final String PORTLET_ID = "course-portlet";
+
 	public CourseIndexer() {
 		setPermissionAware(true);
 	}
@@ -42,50 +45,40 @@ public class CourseIndexer extends BaseIndexer {
 	}
 
 	@Override
-	public boolean hasPermission(PermissionChecker permissionChecker,
-			String courseClassName, long courseClassPK, String actionId)
-			throws Exception {
+	public boolean hasPermission(PermissionChecker permissionChecker, String courseClassName, long courseClassPK, String actionId) throws Exception {
 		return CoursePermission.contains(permissionChecker, courseClassPK,
 				ActionKeys.VIEW);
 	}
-	
+
 	@Override
-	public void postProcessSearchQuery(
-            BooleanQuery searchQuery, SearchContext searchContext)
-            throws Exception {
+	public void postProcessSearchQuery(BooleanQuery searchQuery, SearchContext searchContext) throws Exception {
 		String name = (String) searchContext.getAttribute("name");
-		if(Validator.isNotNull(name)){
+		if (Validator.isNotNull(name)) {
 			if (searchContext.isAndSearch()) {
-                searchQuery.addRequiredTerm("courseName", name);
-            } 
-			else {
-                searchQuery.addTerm("courseName", name);
-            }
+				searchQuery.addRequiredTerm("courseName", name);
+			} else {
+				searchQuery.addTerm("courseName", name);
+			}
 		}
-		
+
 		String lecturer = (String) searchContext.getAttribute("lecturer");
-		if(Validator.isNotNull(lecturer)){
+		if (Validator.isNotNull(lecturer)) {
 			if (searchContext.isAndSearch()) {
-                searchQuery.addRequiredTerm("lecturer", lecturer);
-            } 
-			else {
-                searchQuery.addTerm("lecturer", lecturer);
-            }
+				searchQuery.addRequiredTerm("lecturer", lecturer);
+			} else {
+				searchQuery.addTerm("lecturer", lecturer);
+			}
 		}
-		
+
 		String status = (String) searchContext.getAttribute("status");
-		if(Validator.isNotNull(status)){
+		if (Validator.isNotNull(status)) {
 			if (searchContext.isAndSearch()) {
-                searchQuery.addRequiredTerm("courseStatus", status);
-            }
-			else {
-                searchQuery.addTerm("courseStatus", status);
-            }
+				searchQuery.addRequiredTerm("courseStatus", status);
+			} else {
+				searchQuery.addTerm("courseStatus", status);
+			}
 		}
 	}
-	
-	public static final String[] CLASS_NAME = { Course.class.getName() };
-	public static final String PORTLET_ID = "course-portlet";
 
 	@Override
 	protected void doDelete(Object obj) throws Exception {
@@ -103,7 +96,7 @@ public class CourseIndexer extends BaseIndexer {
 		document.addText("description", course.getDescription());
 		document.addText("lecturer", course.getLecturer());
 		document.addNumber("duration", course.getDuration());
-		document.addText("courseStatus",  Boolean.toString(course.getStatus()));
+		document.addText("courseStatus", Boolean.toString(course.getStatus()));
 		document.addKeyword(Field.GROUP_ID, getSiteGroupId(course.getGroupId()));
 		document.addKeyword(Field.SCOPE_GROUP_ID, course.getGroupId());
 
@@ -111,8 +104,7 @@ public class CourseIndexer extends BaseIndexer {
 	}
 
 	@Override
-	protected Summary doGetSummary(Document document, Locale locale,
-			String snippet, PortletURL protletURL) throws Exception {
+	protected Summary doGetSummary(Document document, Locale locale, String snippet, PortletURL protletURL) throws Exception {
 		Summary summary = createSummary(document);
 		summary.setMaxContentLength(200);
 		return summary;
@@ -125,7 +117,9 @@ public class CourseIndexer extends BaseIndexer {
 
 		Document document = getDocument(course);
 
-		SearchEngineUtil.updateDocument(getSearchEngineId(), course.getCompanyId() , document, true);
+		SearchEngineUtil.updateDocument(getSearchEngineId(),
+				GroupLocalServiceUtil.getGroup(course.getGroupId())
+						.getCompanyId(), document, true);
 	}
 
 	@Override
@@ -150,24 +144,25 @@ public class CourseIndexer extends BaseIndexer {
 		return PORTLET_ID;
 	}
 
-	protected void reindexEntries(long companyId) throws PortalException,
-			SystemException {
-		
+	protected void reindexEntries(long companyId) throws PortalException, SystemException {
+
 		int courseCount = CourseLocalServiceUtil.getCoursesCount();
-		
+
 		int start = 0;
 		int step = 50;
 		int end = start + step;
 		int page = courseCount / step;
 		for (int i = 0; i <= page; i++) {
-			
-			List<Course> courses = CourseLocalServiceUtil.getCourses(start, end);
+
+			List<Course> courses = CourseLocalServiceUtil
+					.getCourses(start, end);
 			List<Document> documents = new ArrayList();
 			for (Course course : courses) {
-				
+
 				documents.add(getDocument(course));
 			}
-			SearchEngineUtil.updateDocuments(getSearchEngineId(), companyId, documents, true);
+			SearchEngineUtil.updateDocuments(getSearchEngineId(), companyId,
+					documents, true);
 			start = end;
 			end = start + step;
 		}

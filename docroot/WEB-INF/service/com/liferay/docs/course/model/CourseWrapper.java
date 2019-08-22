@@ -379,11 +379,6 @@ public class CourseWrapper implements Course, ModelWrapper<Course> {
 	}
 
 	@Override
-	public long getCompanyId() {
-		return _course.getCompanyId();
-	}
-
-	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
