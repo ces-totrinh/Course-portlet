@@ -29,7 +29,7 @@ public class CoursePortlet extends MVCPortlet {
 	}
 	
 	public void deleteCourse(ActionRequest actionRequest, ActionResponse actionResponse) throws Exception {
-		long courseId = ParamUtil.getLong(actionRequest, "courseId");
+		long courseId = Long.parseLong(ParamUtil.getString(actionRequest, "courseId"));
 		CourseServiceUtil.deleteCourse(courseId);
 		sendRedirect(actionRequest, actionResponse);
 	}
