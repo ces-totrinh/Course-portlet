@@ -1,8 +1,11 @@
 <%@ include file="/html/init.jsp"%>
 
 <%
-	long courseId = ParamUtil.getLong(renderRequest, "courseId");
+	long courseId = 0;
 	Course course = null;
+	if(ParamUtil.getString(renderRequest, "courseId") != ""){
+		courseId = Long.parseLong(ParamUtil.getString(renderRequest, "courseId"));
+	}
 	if(courseId > 0) {
 		course = CourseLocalServiceUtil.getCourse(courseId);
 	}
